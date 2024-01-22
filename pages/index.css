@@ -1,0 +1,62 @@
+@import url(../vendor/normalize.css);
+@import url(../vendor/fonts.css);
+@import url(../blocks/header.css);
+@import url(../blocks/page.css);
+@import url(../blocks/profile.css);
+@import url(../blocks/cards.css);
+@import url(../blocks/footer.css);
+
+@media screen and (max-width: 320px) {
+  .page {
+    width: auto;
+    height: 2812px;
+  }
+
+  .header {
+    margin: 28px -167px 32px;
+  }
+
+  .profile {
+    flex-direction: column;
+    background-color: aqua;
+  }
+
+  .profile__info {
+    text-align: center;
+  }
+
+  .profile__title {
+    margin-top: 30px;
+  }
+
+  .profile__add-button {
+    margin: 36px 0;
+    width: 282px;
+    height: 50px;
+    flex-shrink: 0;
+    border: 2px solid #fff;
+  }
+
+  .cards {
+    margin: 298px 19px 96px;
+    padding: 0;
+  }
+
+  .card__list {
+    margin: 0;
+    padding: 0;
+  }
+
+  .footer {
+    width: 282px;
+    height: 14px;
+  }
+
+  .footer__content {
+    margin: 48px 19px 0;
+    padding-bottom: 36px;
+    display: flex;
+    justify-content: center;
+  }
+}
+
