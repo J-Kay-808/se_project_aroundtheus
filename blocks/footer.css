@@ -1,10 +1,18 @@
-.footer__content {
-    margin-bottom: 60px;
-    margin-top: 85px;
+.footer {
+  margin: 0;
 }
 
-
 .footer__image {
-    width: 318px;
-    height: 18px;
+  padding: 85px 962px 60px 0px;
+  width: 318px;
+  height: 18px;
+}
+
+@media screen and (max-width: 320px) and (max-width: 775px) {
+  .footer__content {
+    margin: 48px 19px 0;
+    padding-bottom: 36px;
+    display: flex;
+    justify-content: center;
+  }
 }
