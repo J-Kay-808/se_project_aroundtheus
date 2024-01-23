@@ -47,6 +47,11 @@
   background: transparent url(../images/Group.svg) center no-repeat;
 }
 
+.card__like-button {
+  opacity: 0.6px;
+  cursor: pointer;
+}
+
 @media screen and (max-width: 320px) and (max-width: 775px) {
   .card__list {
     margin: 0;
