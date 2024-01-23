@@ -6,9 +6,10 @@
 }
 
 .header__logo {
+  display: flex;
   margin-top: 45px;
   margin-bottom: 40px;
-  margin-right: 707px;
+  /* margin-right: 707px; */
 }
 
 @media screen and (max-width: 320px) and (max-width: 775px) {
