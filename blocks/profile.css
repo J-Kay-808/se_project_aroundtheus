@@ -19,31 +19,30 @@
   grid-template-areas:
     "title button"
     "description description";
-  grid-template-columns: minmax(auto 373px) auto;
-  grid-gap: 18px;
-  width: 100%;
+  grid-template-columns: minmax(auto, 373px), auto;
 }
 
 .profile__title {
   color: #fff;
   font-family: "Inter-Medium", Arial, sans-serif;
   font-size: 42px;
-  line-height: 1.1;
+  line-height: 48px;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
-  margin: 0;
-  padding: 0;
+  margin: 0 20px 0 0;
+  padding: 0px;
   max-width: 373px;
   grid-area: title;
-  width: 100%;
+  /* width: 100%; */
 }
 
 .profile__description {
   margin: 0;
   color: #fff;
-  font-family: "Inter-regular", Arial, sans-serif;
-  line-height: normal;
+  font-family: "Inter-normal", Arial, sans-serif;
+  font-size: 18px;
+  line-height: 22px;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -56,11 +55,10 @@
   background: transparent url(../images/Edit\ Button.svg) center no-repeat;
   width: 24px;
   height: 24px;
-  margin-right: 18px;
+  margin-right: 20px;
   align-self: center;
   border: 1px solid #fff;
   grid-area: button;
-
 }
 
 .profile__add-button {
@@ -68,6 +66,7 @@
   width: 150px;
   height: 50px;
   margin-left: auto;
+  border-radius: 2px;
   border: 2px solid #fff;
 }
 
@@ -86,29 +85,42 @@
 @media screen and (max-width: 320px) {
   .profile {
     flex-direction: column;
-    margin-top: 42px;
     width: 100%;
+  }
+
+  .profile__avatar {
+    margin: 0;
   }
 
   .profile__info {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    text-align: center;
+    margin: 30px 0px 0px;
     max-width: 282px;
-    width: 100%;
   }
 
   .profile__title {
-    margin: 26px 0 14px;
     max-width: 196px;
+    font-size: 22px;
+    margin: 0 20px 0 0;
+  }
+  
+  .profile__description {
+    font-size: 14px;
+    margin: 0;
+    text-align: center;
   }
 
+  .profile__edit-button {
+    width: 18px;
+    height: 18px;
+    margin: 0;
+  }
 
   .profile__add-button {
-    /* width: 282px; */
-    min-width: 100%;
-    margin: 36px;
+    min-width: 282px;
+    margin: 20px 0 0;
   }
 }
 
