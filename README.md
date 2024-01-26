@@ -16,4 +16,4 @@
 
   # Explorer Webpage:
 
-  - https://j-kay-808.github.io/se_project_aroundtheus/us/
+  - https://j-kay-808.github.io/se_project_aroundtheus/
