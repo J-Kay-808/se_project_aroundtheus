@@ -1,0 +1,131 @@
+.modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  display: none;
+  padding: 0px 19px;
+}
+
+.modal__opened {
+  display: flex;
+}
+
+.modal__container {
+  background-color: #fff;
+  margin: auto;
+  padding: 34px;
+  border-radius: 10px;
+  position: relative;
+  width: 430px;
+  height: 330px;
+}
+
+.modal__close {
+  background: transparent url(../images/Close\ Icon.svg) no-repeat;
+  border: none;
+  bottom: calc(100% + 5px);
+  left: calc(100% + 5px);
+  width: 40px;
+  height: 40px;
+  background-size: contain;
+  position: absolute;
+  cursor: pointer;
+}
+
+.modal__heading {
+  font-size: 24px;
+  font-family: "Inter-bold", Arial, sans-serif;
+  max-width: 330px;
+  width: 100%;
+  height: 23px;
+  color: #000;
+}
+
+.modal__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #000;
+  max-width: 430px;
+}
+
+.modal__title {
+  max-width: 358px;
+  width: 100%;
+  margin-top: 39px;
+  border: #fff;
+  border-bottom: 1px solid rgb(84 84 84 / 0.7);
+}
+
+.modal__title::placeholder {
+  font-size: 14px;
+  font-family: "Inter-normal", Arial, sans-serif;
+  line-height: 17px;
+  color: #000;
+  padding-bottom: 13px;
+}
+
+.modal__description {
+  max-width: 358px;
+  width: 100%;
+  margin-top: 43px;
+  border: #fff;
+  border-bottom: 1px solid rgb(84 84 84 / 0.7);
+}
+
+.modal__description::placeholder {
+  font-size: 14px;
+  font-family: "Inter-normal", Arial, sans-serif;
+  line-height: 17px;
+  color: #000;
+}
+
+.modal__button {
+  margin-top: 48px;
+  margin-bottom: auto;
+  width: 100%;
+  max-width: 358px;
+  height: 50px;
+  font-size: 18px;
+  font-family: "Inter-normal", Arial, sans-serif;
+  color: #fff;
+  background-color: #000;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 400px) {
+  .modal {
+    width: 100%;
+  }
+
+  .modal__container {
+    min-width: 282px;
+    width: 100%;
+    height: 322px;
+  }
+
+  .modal__close {
+    width: 26px;
+    height: 26px;
+    top: -14px;
+    /* bottom: calc(100% + 14px);
+    left: calc(100% + 5px); */
+    
+  }
+
+  .modal__title {
+    width: 238px;
+  }
+
+  .modal__description {
+    width: 238px;
+  }
+
+  .modal__button {
+    width: 238px;
+  }
+}
