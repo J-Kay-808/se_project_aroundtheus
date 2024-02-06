@@ -2,9 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="author" content="Jarad Crowell" />
-    <meta name="keywords" content="HTML, CSS" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Jarad Crowell" />
+    <meta name="keywords" content="HTML, CSS, Javascript" />
     <link rel="stylesheet" href="./pages/index.css" />
     <link rel="shortcut icon" href="favicon.ico" />
     <title>Around the U.S.</title>
@@ -32,81 +32,13 @@
               id="profile-edit-button"
               class="profile__edit-button"
             ></button>
-            <p class="profile__description" id="profile-description">
-              Explorer
-            </p>
+            <p class="profile__description" id="profile-description">Explorer</p>
           </div>
           <button type="button" class="profile__add-button"></button>
         </section>
 
         <section class="cards page__section">
-          <ul class="cards__list">
-            <!-- <li class="card">
-              <img
-                src="./images/yosemite.jpg"
-                alt="yosemite valley"
-                class="card__image"
-              />
-              <div class="card__description">
-                <h2 class="card__title">Yosemite Valley</h2>
-                <button type="button" class="card__like-button"></button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                src="./images/lake-louise.jpg"
-                alt="lake louise"
-                class="card__image"
-              />
-              <div class="card__description">
-                <h2 class="card__title">Lake Louise</h2>
-                <button type="button" class="card__like-button"></button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                src="./images/bald-mountains.jpg"
-                alt="bald mountains"
-                class="card__image"
-              />
-              <div class="card__description">
-                <h2 class="card__title">Bald Mountains</h2>
-                <button type="button" class="card__like-button"></button>
-              </div>
-            </li>
-
-            <li class="card">
-              <img
-                src="./images/latemar.jpg"
-                alt="latemar"
-                class="card__image"
-              />
-              <div class="card__description">
-                <h2 class="card__title">Latemar</h2>
-                <button type="button" class="card__like-button"></button>
-              </div>
-            </li>
-
-            <li class="card">
-              <img
-                src="./images/vanoise.jpg"
-                alt="vanoise"
-                class="card__image"
-              />
-              <div class="card__description">
-                <h2 class="card__title">Vanoise National park</h2>
-                <button type="button" class="card__like-button"></button>
-              </div>
-            </li>
-
-            <li class="card">
-              <img src="./images/lago.jpg" alt="lago" class="card__image" />
-              <div class="card__description">
-                <h2 class="card__title">Lago di Braies</h2>
-                <button type="button" class="card__like-button"></button>
-              </div>
-            </li> -->
-          </ul>
+          <ul class="cards__list"></ul>
         </section>
       </main>
       <footer class="footer page__section">
@@ -117,7 +49,7 @@
       <div class="modal__container">
         <button class="modal__close" id="modal-close-button"></button>
         <p class="modal__heading">Edit Profile</p>
-        <form class="modal__form" id="modal-form">
+        <form class="modal__form" name="modal-form" id="modal-form">
           <input
             type="text"
             name="title"
