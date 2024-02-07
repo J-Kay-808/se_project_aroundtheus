@@ -7,7 +7,7 @@
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
   display: none;
-  padding: 0px 19px;
+  /* padding: 0px 19px; */
 }
 
 .modal_opened {
@@ -17,12 +17,9 @@
 .modal__container {
   background-color: #fff;
   margin: auto;
-  padding: 34px;
+  padding: 34px 36px 36px;
   border-radius: 10px;
   position: relative;
-  max-width: 100%;
-  width: 430px;
-  height: 330px;
 }
 
 .modal__close {
@@ -37,29 +34,39 @@
   cursor: pointer;
 }
 
+.modal__close:hover {
+  opacity: 60%;
+  cursor: pointer;
+}
+
 .modal__heading {
   font-size: 24px;
   font-family: "Inter-bold", Arial, sans-serif;
-  max-width: 330px;
+  width: 330px;
   width: 100%;
   line-height: 29px;
   color: #000;
+  margin: 0px;
+  flex-shrink: 0;
 }
 
 .modal__form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  grid-template-areas:
+  "heading"
+  "title"
+  "description"
+  "button";
   color: #000;
-  max-width: 100%;
 }
 
 .modal__title {
-  max-width: 358px;
-  width: 100%;
-  margin-top: 39px;
+  width: 358px;
+  height: 27px;
+  margin: 54px 0 0;
   border: #fff;
   border-bottom: 1px solid rgb(84 84 84 / 0.7);
+  line-height: 17px;
 }
 
 .modal__title::placeholder {
@@ -71,9 +78,11 @@
 }
 
 .modal__description {
-  max-width: 358px;
+  width: 358px;
   width: 100%;
-  margin-top: 43px;
+  height: 27px;
+  flex-shrink: 0;
+  margin: 30px 0 0;
   border: #fff;
   border-bottom: 1px solid rgb(84 84 84 / 0.7);
 }
@@ -87,50 +96,51 @@
 
 .modal__button {
   margin-top: 48px;
-  margin-bottom: auto;
-  width: 100%;
-  max-width: 358px;
+  width: 358px;
   height: 50px;
   font-size: 18px;
   font-family: "Inter-normal", Arial, sans-serif;
   color: #fff;
   background-color: #000;
+  flex-shrink: 0;
+  border-radius: 2px;
+}
+
+.modal__button:hover {
+  opacity: 80%;
   cursor: pointer;
 }
 
 @media screen and (max-width: 320px) {
-  .modal {
-    width: 100%;
-  }
-
-  .modal__form {
-    width: 100%;
-  }
-
   .modal__container {
     padding: 25px 20px;
+    width: 282px;
   }
 
   .modal__close {
+    left: calc(100% - 35px);
+    bottom: calc(100% + 14px);
     width: 26px;
     height: 26px;
-    right: -15px;
+
   }
 
   .modal__heading {
+    width: 238px;
     font-size: 18px;
     line-height: 22px;
   }
 
   .modal__title {
     font-size: 14px;
-    line-height: 17px;
+    height: 27px;
     width: 238px;
+    margin-top: 75px 0 0;
   }
 
   .modal__description {
     font-size: 14px;
-    line-height: 17px;
+    height: 27px;
     width: 238px;
   }
 
