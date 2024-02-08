@@ -114,6 +114,7 @@
   .modal__container {
     padding: 25px 20px;
     width: 282px;
+    height: 322px;
   }
 
   .modal__close {
@@ -128,13 +129,14 @@
     width: 238px;
     font-size: 18px;
     line-height: 22px;
+    margin-top: 25px;
   }
 
   .modal__title {
     font-size: 14px;
     height: 27px;
     width: 238px;
-    margin-top: 75px 0 0;
+    margin: 75px 0 0;
   }
 
   .modal__description {
