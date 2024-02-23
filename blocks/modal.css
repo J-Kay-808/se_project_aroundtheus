@@ -107,6 +107,22 @@
   cursor: pointer;
 }
 
+.image__modal {
+  object-fit: cover;
+  max-height: 75vh;
+  max-width: 75vw;
+  border: none;
+}
+
+.image__description {
+  width: 240px;
+  height: 12px;
+  color: #fff;
+  font-size: 12px;
+  position: absolute;
+  font-family: "Inter-normal", Arial, sans-serif;
+}
+
 @media screen and (max-width: 400px) {
   .modal__container {
     padding: 22px;
