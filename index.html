@@ -32,9 +32,15 @@
               id="profile-edit-button"
               class="profile__edit-button"
             ></button>
-            <p class="profile__description" id="profile-description">Explorer</p>
+            <p class="profile__description" id="profile-description">
+              Explorer
+            </p>
           </div>
-          <button type="button" class="profile__add-button" id="profile-add-button"></button>
+          <button
+            type="button"
+            class="profile__add-button"
+            id="profile-add-button"
+          ></button>
         </section>
 
         <section class="cards page__section">
@@ -46,10 +52,10 @@
       </footer>
     </div>
 
-<!-- EDIT MODAL -->
+    <!-- EDIT MODAL -->
     <div class="modal" id="profile-edit-modal">
       <div class="modal__container">
-        <button class="modal__close" id="modal-close-button"></button>
+        <button class="modal__close" id="edit-close-button"></button>
         <p class="modal__heading">Edit Profile</p>
         <form class="modal__form" name="modal-form" id="profile-edit-form">
           <input
@@ -73,10 +79,10 @@
       </div>
     </div>
 
-<!-- ADD MODAL -->
+    <!-- ADD MODAL -->
     <div class="modal" id="add-card-modal">
       <div class="modal__container">
-        <button class="modal__close" id="modal-close-button"></button>
+        <button class="modal__close" id="add-close-button"></button>
         <p class="modal__heading">New Place</p>
         <form class="modal__form" name="modal-form" id="add-card-form">
           <input
@@ -100,20 +106,19 @@
       </div>
     </div>
 
-<!-- IMAGE MODAL -->
+    <!-- IMAGE MODAL -->
 
     <div class="modal" id="image-modal">
       <div class="modal__container">
-        <button class="modal__close" id="modal-close-button"></button>
-        <img src="" alt="" class="image__modal" id="image__modal" /> 
+        <button class="modal__close" id="image-close-button"></button>
+        <img src="" alt="" class="image__modal" id="image__modal" />
         <p class="image__description" id="image-description"></p>
       </div>
     </div>
 
-
     <template id="card-template">
       <li class="card">
-        <img src="" alt="" class="card__image" /> 
+        <img src="" alt="" class="card__image" />
         <button type="button" class="delete__button"></button>
         <div class="card__description">
           <h2 class="card__title"></h2>
