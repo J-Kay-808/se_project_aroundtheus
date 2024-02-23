@@ -66,7 +66,6 @@ const imageDescriptionModal = document.querySelector("#image-description");
 const imageCloseButton = imageModal.querySelector("#image-close-button");
 
 const closeButton = document.querySelectorAll(".modal__close");
-// const modal = document.querySelectorAll(".modal")
 
 const profileEditForm = document.forms["modal-form"];
 
