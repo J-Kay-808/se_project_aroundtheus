@@ -127,7 +127,6 @@ function handleProfileEditSubmit(e) {
   e.preventDefault();
   profileTitle.textContent = modalTitleInput.value;
   profileDescription.textContent = modalDescriptionInput.value;
-  closeModal(profileEditModal);
 }
 
 function handleAddCardSubmit(e) {
@@ -135,7 +134,6 @@ function handleAddCardSubmit(e) {
   const name = cardTitleInput.value;
   const link = cardUrlInput.value;
   renderCard({ name, link }, cardWrap);
-  closeModal(addCardModal);
 }
 
 /*                                       */
@@ -152,11 +150,13 @@ addCardButton.addEventListener("click", () => {
   openModal(addCardModal);
 });
 
-profileEditCloseButton.addEventListener("click", closeModal);
+profileEditCloseButton.addEventListener("click", () => {
+  closeModal(profileEditModal);
+});
 
-addCardCloseButton.addEventListener("click", closeModal);
-
-// imageCloseButton.addEventListener("click", closeModal);
+addCardCloseButton.addEventListener("click", () => {
+  closeModal(addCardModal);
+});
 
 imageCloseButton.addEventListener("click", () => {
   closeModal(imageModal);
@@ -166,10 +166,5 @@ imageCloseButton.addEventListener("click", () => {
 
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 addCardElement.addEventListener("submit", handleAddCardSubmit);
-
-closeButton.forEach((button) => {
-  const modal = button.closest(".modal");
-  button.addEventListener("click", () => closeModal(modal));
-});
 
 initialCards.forEach((cardData) => renderCard(cardData, cardWrap));
