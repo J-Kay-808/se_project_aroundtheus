@@ -77,17 +77,18 @@ const cardTemplate =
 /*             Functions                 */
 /*                                       */
 
-function renderCard(cardData, cardWrap) {
-  const cardElement = getCardElement(cardData);
-  cardWrap.prepend(cardElement);
-}
-
 function openModal(modal) {
   modal.classList.add("modal_opened");
 }
 
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
+}
+
+
+function renderCard(cardData, cardWrap) {
+  const cardElement = getCardElement(cardData);
+  cardWrap.prepend(cardElement);
 }
 
 function getCardElement(cardData) {
@@ -149,14 +150,17 @@ profileEditButton.addEventListener("click", () => {
 
 addCardButton.addEventListener("click", () => {
   openModal(addCardModal);
-  addCardElement.reset();
 });
 
 profileEditCloseButton.addEventListener("click", closeModal);
 
 addCardCloseButton.addEventListener("click", closeModal);
 
-imageCloseButton.addEventListener("click", closeModal);
+// imageCloseButton.addEventListener("click", closeModal);
+
+imageCloseButton.addEventListener("click", () => {
+  closeModal(imageModal);
+});
 
 // FORM LISTENERS
 
