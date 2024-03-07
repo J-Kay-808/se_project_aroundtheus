@@ -141,6 +141,12 @@
   top: calc(100% + 10px);
 }
 
+.modal__input_type_error {
+  border-color: #ff0000;
+  visibility: visible;
+}
+
+
 @media screen and (max-width: 400px) {
   .modal__container {
     padding: 22px;
