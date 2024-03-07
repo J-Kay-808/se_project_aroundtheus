@@ -141,9 +141,29 @@
   top: calc(100% + 10px);
 }
 
+.modal__error {
+  margin-bottom: 13px;
+  visibility: hidden;
+  width: 358px;
+  height: 12px;
+}
+
 .modal__input_type_error {
   border-color: #ff0000;
   visibility: visible;
+}
+
+.modal__button_disabled {
+ opacity: 15%;
+}
+
+.modal__error_visible {
+  font-size: 12px;
+  font-family: "Inter-normal", Arial, sans-serif;
+  color: #ff0000;
+  line-height: 15px;
+  position: absolute;
+  width: 164px;
 }
 
 
