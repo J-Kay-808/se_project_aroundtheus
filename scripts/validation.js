@@ -22,23 +22,31 @@ function checkInputValidity(formEl, inputEl, config) {
   hideInputError(formEl, inputEl, config);
 }
 
-
 function hasInvalidInput(inputList) {
-    return ! inputList.every((inputEl) => inputEl.validity.valid)
+  return !inputList.every((inputEl) => inputEl.validity.valid);
 }
 
 //dislikeButton
+function disableButton(submitButton, { inactiveButtonClass }) {
+  submitButton.classList.add(inactiveButtonClass);
+  submitButton.disabled = true;
+  console.log(disableButton);
+}
 
 //enableButton
- 
+function enableButton(submitButton, { inactiveButtonClass }) {
+  submitButton.classList.remove(inactiveButtonClass);
+  submitButton.disabled = false;
+}
+
 function toggleButtonState(inputEls, submitButton, { inactiveButtonClass }) {
   if (hasInvalidInput(inputEls)) {
     submitButton.classList.add(inactiveButtonClass);
     submitButton.disabled = true;
-    return
-  } 
-    submitButton.classList.remove(inactiveButtonClass);
-    submitButton.disabled = false;
+    return;
+  }
+  submitButton.classList.remove(inactiveButtonClass);
+  submitButton.disabled = false;
 }
 
 function setEventListeners(formEl, config) {
@@ -48,7 +56,7 @@ function setEventListeners(formEl, config) {
   inputEls.forEach((inputEl) => {
     inputEl.addEventListener("input", (e) => {
       checkInputValidity(formEl, inputEl, config);
-        toggleButtonState(inputEls, submitButton, config);
+      toggleButtonState(inputEls, submitButton, config);
     });
   });
 }

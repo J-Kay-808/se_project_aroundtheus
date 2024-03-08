@@ -146,7 +146,10 @@
   visibility: hidden;
   width: 358px;
   height: 12px;
+  position: absolute;
 }
+
+/* FIX ADD NEW CARD MODAL ERROR NOT WORKING FOR BOTH */
 
 .modal__input_type_error {
   border-color: #ff0000;
@@ -162,8 +165,9 @@
   font-family: "Inter-normal", Arial, sans-serif;
   color: #ff0000;
   line-height: 15px;
-  position: absolute;
-  width: 164px;
+  position: relative;
+  width: 358px;
+  visibility: visible;
 }
 
 
