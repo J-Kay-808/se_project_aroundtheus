@@ -149,8 +149,6 @@
   position: absolute;
 }
 
-/* FIX ADD NEW CARD MODAL ERROR NOT WORKING FOR BOTH */
-
 .modal__input_type_error {
   border-color: #ff0000;
   visibility: visible;
