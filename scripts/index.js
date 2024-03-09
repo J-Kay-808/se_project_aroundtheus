@@ -72,8 +72,6 @@ const cardWrap = document.querySelector(".cards__list");
 const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
 
-
-
 /*                                       */
 /*             Functions                 */
 /*                                       */
@@ -102,14 +100,14 @@ function handleEscape(evt) {
 
 function handleClickOverlay() {
   modals.forEach((modal) => {
-   modal.addEventListener("mousedown", (evt) => {
-     if (evt.target === modal) {
-       closeModal(modal);
-     }
-   });
+    modal.addEventListener("mousedown", (evt) => {
+      if (evt.target === modal) {
+        closeModal(modal);
+      }
+    });
   });
 }
- 
+
 handleClickOverlay();
 
 function getCardElement(cardData) {
@@ -138,7 +136,7 @@ function getCardElement(cardData) {
   cardImageEl.alt = cardData.name;
   cardTitleEl.textContent = cardData.name;
 
-  return cardElement; 
+  return cardElement;
 }
 /*                                       */
 /*             Event Handlers            */
