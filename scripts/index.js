@@ -205,17 +205,29 @@ addCardButton.addEventListener("click", () => {
   openModal(addCardModal);
 });
 
-profileEditCloseButton.addEventListener("click", () => {
-  closeModal(profileEditModal);
+
+modals.forEach((modal) => {
+  modal.addEventListener("mousedown", (evt) => {
+    if (evt.target.classList.contains(".modal_opened")) {
+      closeModal(modal);
+    }
+    if (evt.target.classList.contains(".modal__close")) {
+      closeModal(modal);
+    }
+  });
 });
 
-addCardCloseButton.addEventListener("click", () => {
-  closeModal(addCardModal);
-});
+// profileEditCloseButton.addEventListener("click", () => {
+//   closeModal(profileEditModal);
+// });
 
-imageCloseButton.addEventListener("click", () => {
-  closeModal(imageModal);
-});
+// addCardCloseButton.addEventListener("click", () => {
+//   closeModal(addCardModal);
+// });
+
+// imageCloseButton.addEventListener("click", () => {
+//   closeModal(imageModal);
+// });
 
 // FORM LISTENERS
 

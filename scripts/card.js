@@ -15,12 +15,12 @@ export default class Card {
     });
 
     this._cardImageEl.addEventListener("click", () => {
-      this._handleImageClick(this._name, this._link);
+      this._handleImageClick( this._name, this._link);
     });
   }
 
   _handleLikeIcon() {
-    likeButton.classList.toggle("card__like-button_active");
+    this._likeButton.classList.toggle("card__like-button_active");
   }
 
   _handleDeleteCard() {
