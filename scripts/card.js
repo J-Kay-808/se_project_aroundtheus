@@ -31,21 +31,21 @@ export default class Card {
   _getTemplate() {
     return document
       .querySelector(this._cardSelector)
-      .content.querySelector(".card")
-      .cloneNode(true);
+      .content.firstElementChild.cloneNode(true);
   }
 
   getView() {
-    this._element = this._getTemplate();
-    this._cardImageEl = cardElement.querySelector(".card__image");
-    this._cardTitleEl = cardElement.querySelector(".card__title");
+    this._cardElement = this._getTemplate();
+    this._cardImageEl = this._cardElement.querySelector(".card__image");
+    this._cardTitleEl = this._cardElement.querySelector(".card__title");
+    this._deleteButton = this._cardElement.querySelector(".delete__button");
+    this._likeButton = this._cardElement.querySelector(".card__like-button");
+
     this._cardImageEl.src = this._link;
     this._cardImageEl.alt = this._name;
-    this._imageDescriptionEl.textContent = this._name;
-    this._likeButton = cardElement.querySelector(".card__like-button");
-    this._deleteButton = cardElement.querySelector(".delete__button");
+    this._cardTitleEl.textContent = this._name;
 
     this._setEventListener();
-    return this._element;
+    return this._cardElement;
   }
 }
