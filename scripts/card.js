@@ -1,21 +1,51 @@
-//Create the Card class. This creates a card with text and an image link, along with the appropriate handlers.
+export default class Card {
+  constructor(cardData, cardSelector, handleImageClick) {
+    this._name = cardData.name;
+    this._link = cardData.link;
+    this._cardSelector = cardSelector;
+    this._handleImageClick = handleImageClick;
+  }
 
-// It should accept the following arguments:
+  _setEventListener() {
+    this._likeButton.addEventListener("click", () => {
+      this._handleLikeIcon();
+    });
+    this._deleteButton.addEventListener("click", () => {
+      this._handleDeleteCard();
+    });
 
-// data: an object containing the card's text and a link to its image
-// cardSelector: a selector string for the corresponding <template> element
-// handleImageClick: a function that handles the opening of the preview picture modal. You should already have this function from previous iterations of the project, although it might have a different name, or it might be an anonymous function. See below for notes on how to implement it.
-// It should also have private methods for working with markup and adding event listeners, including:
+    this._cardImageEl.addEventListener("click", () => {
+      this._handleImageClick(this._name, this._link);
+    });
+  }
 
-// a _setEventListeners method that sets the necessary event listeners
+  _handleLikeIcon() {
+    likeButton.classList.toggle("card__like-button_active");
+  }
 
-// export default class Card {
-//   constructor({ name, link }, cardSelector, handleImageClick) {
-//     this._name = name;
-//     this._link = link;
-//     this._cardSelector = cardSelector;
-//     this._handleImageClick = handleImageClick;
-//   }
+  _handleDeleteCard() {
+    this._cardElement.remove();
+    this._cardElement = null;
+  }
 
-//   getView() {}
-// }
+  _getTemplate() {
+    return document
+      .querySelector(this._cardSelector)
+      .content.querySelector(".card")
+      .cloneNode(true);
+  }
+
+  getView() {
+    this._element = this._getTemplate();
+    this._cardImageEl = cardElement.querySelector(".card__image");
+    this._cardTitleEl = cardElement.querySelector(".card__title");
+    this._cardImageEl.src = this._link;
+    this._cardImageEl.alt = this._name;
+    this._imageDescriptionEl.textContent = this._name;
+    this._likeButton = cardElement.querySelector(".card__like-button");
+    this._deleteButton = cardElement.querySelector(".delete__button");
+
+    this._setEventListener();
+    return this._element;
+  }
+}
