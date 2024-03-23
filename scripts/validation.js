@@ -22,8 +22,8 @@ function checkInputValidity(formEl, inputEl, config) {
   hideInputError(formEl, inputEl, config);
 }
 
-function hasInvalidInput(inputList) {
-  return !inputList.every((inputEl) => inputEl.validity.valid);
+function hasInvalidInput(inputEls) {
+  return !inputEls.every((inputEl) => inputEl.validity.valid);
 }
 
 //dislikeButton
