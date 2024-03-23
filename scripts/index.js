@@ -1,6 +1,5 @@
-// import Card from "./card.js";
+import Card from "./card.js";
 import FormValidator from "./formValidator.js";
-
 
 const initialCards = [
   {
@@ -33,10 +32,6 @@ const initialCards = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
   },
 ];
-
-
-
-
 
 /*                                       */
 /*                   Elements            */
@@ -71,7 +66,9 @@ const imageModal = document.querySelector("#image-modal");
 const cardImageModal = document.querySelector("#image__modal");
 const imageDescriptionModal = document.querySelector("#image-description");
 const imageCloseButton = imageModal.querySelector("#image-close-button");
-const imageModalPrevieWLink = imageModal.querySelector("modal__container-image");
+const imageModalPrevieWLink = imageModal.querySelector(
+  "modal__container-image"
+);
 
 const modals = document.querySelectorAll(".modal");
 
@@ -81,44 +78,30 @@ const cardWrap = document.querySelector(".cards__list");
 const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
 
-/*                                       */
-/*             card.js                   */
-/*                                       */
-
-// function handleImageClick(name, link) {
-//   imageModalPrevieWLink.src = link;
-//   imageModalPrevieWLink.alt = name;
-//   imageModalPrevieWLink.textContent = name;
-//   openModal(imageModalPrevieWLink)
-// }
-
-// function renderCard(cardData, cardWrap) {
-//   const cardElement = getCardElement(cardData);
-//   cardWrap.prepend(cardElement);
-// }
-
-
+const cardSelector = "#card-template";
 
 /*                                       */
 /*                Validation             */
 /*                                       */
 
-
-const settings = {
+export const validationSettings = {
   inputSelector: ".modal__input",
   submitButtonSelector: ".modal__button",
   inactiveButtonClass: "modal__button_disabled",
   inputErrorClass: "modal__input_type_error",
   errorClass: "modal__error_visible",
-}
+};
 
-const editFormElement =  profileEditModal.querySelector(".modal__form");
+const editFormElement = profileEditModal.querySelector(".modal__form");
 const addFormElement = addCardModal.querySelector(".modal__form");
-const editFormValidator = new FormValidator(settings, editFormElement);
-const addFormValidator = new FormValidator(settings, addFormElement);
+const editFormValidator = new FormValidator(
+  validationSettings,
+  editFormElement
+);
+const addFormValidator = new FormValidator(validationSettings, addFormElement);
 
-console.log(editFormElement);
-console.log(addFormElement);
+editFormValidator.enableValidation();
+addFormValidator.enableValidation();
 
 /*                                       */
 /*             Functions                 */
@@ -133,12 +116,6 @@ function closeModal(modal) {
   modal.classList.remove("modal_opened");
   document.removeEventListener("keydown", handleEscape);
 }
-
-function renderCard(cardData, cardWrap) {
-  const cardElement = getCardElement(cardData);
-  cardWrap.prepend(cardElement);
-}
-
 
 function handleEscape(evt) {
   if (evt.key === "Escape") {
@@ -159,7 +136,11 @@ function handleClickOverlay() {
 
 handleClickOverlay();
 
-function getCardElement(cardData) {
+/*                                       */
+/*             card.js                   */
+/*                                       */
+
+const getCardElement = (cardData) => {
   const cardElement = cardTemplate.cloneNode(true);
   const cardImageEl = cardElement.querySelector(".card__image");
   const cardTitleEl = cardElement.querySelector(".card__title");
@@ -186,7 +167,14 @@ function getCardElement(cardData) {
   cardTitleEl.textContent = cardData.name;
 
   return cardElement;
+};
+
+function renderCard(cardData, cardWrap) {
+  const cardElement = getCardElement(cardData);
+  const card = new Card(cardData, cardSelector);
+  cardWrap.prepend(cardElement);
 }
+
 /*                                       */
 /*             Event Handlers            */
 /*                                       */
