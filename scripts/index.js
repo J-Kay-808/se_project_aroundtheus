@@ -1,5 +1,5 @@
 import Card from "./card.js";
-import FormValidator from "./formValidator.js";
+import FormValidator from "./FORMVAILDATOR.js";
 
 const initialCards = [
   {
