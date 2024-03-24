@@ -41,7 +41,7 @@ export default class FormValidator {
       _inputEl.addEventListener("input", (e) => {
         this._checkInputValidity(_inputEl);
         this._toggleButtonState();
-      });
+        });
     });
   }
 
@@ -52,27 +52,25 @@ export default class FormValidator {
     });
   }
 
-//   resetValidation() {
-//     this._toggleButtonState();
-//     console.log(this);
-//   }
 
   enableValidation() {
     this._form.addEventListener("submit", (e) => {
       e.preventDefault();
     });
 
-    this._setEventListeners();
+    this._setEventListeners(this._form);
   }
 
   //  BUTTONS
 
   _toggleButtonState() {
     if (this._hasInvalidInput(this._inputEls)) {
-      this.disableButton();
-    } else {
-      this._enableButton();
+      this._submitButton.classList.add(this._inactiveButtonClass);
+      this._submitButton.disabled = true;
+      return;
     }
+    this._submitButton.classList.remove(this._inactiveButtonClass);
+    this._submitButton.disabled = false;
   }
 
   disableButton() {
