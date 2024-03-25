@@ -68,7 +68,7 @@ const imageDescriptionModal = document.querySelector("#image-description");
 const imageCloseButton = imageModal.querySelector("#image-close-button");
 const imageModalPrevieWLink = imageModal.querySelector(
   "modal__container-image"
-);
+); 
 
 const modals = document.querySelectorAll(".modal");
 
@@ -148,6 +148,7 @@ function handleImageClick(cardData) {
   cardImageModal.src = cardData.link;
   cardImageModal.alt = cardData.name;
   imageDescriptionModal.textContent = cardData.name;
+  cardImageModal.reset();
 }
 
 /*                                       */
