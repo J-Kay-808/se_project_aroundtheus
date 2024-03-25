@@ -1,4 +1,4 @@
-import Card from "./Cards.js";
+import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
 
 const initialCards = [
@@ -148,7 +148,6 @@ function handleImageClick(cardData) {
   cardImageModal.src = cardData.link;
   cardImageModal.alt = cardData.name;
   imageDescriptionModal.textContent = cardData.name;
-  cardImageModal.reset();
 }
 
 /*                                       */
@@ -168,6 +167,8 @@ function handleAddCardSubmit(e) {
   renderCard({ name, link }, cardWrap);
   closeModal(addCardModal);
   addCardForm.reset();
+  // formValidators["add-card-form"].resetValidation();
+  // addCard.close();
 }
 
 /*                                       */
