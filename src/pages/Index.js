@@ -1,6 +1,4 @@
 import "../pages/index.css";
-
-import Modal from "../components/Modal.js";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
@@ -10,12 +8,7 @@ import ModalWithImage from "../components/ModalWithImage.js";
 import { initialCards } from "../utils/Constants.js";
 
 const profileEditButton = document.querySelector("#profile-edit-button");
-const profileEditModal = document.querySelector("#profile-edit-modal");
 const profileEditForm = document.forms["profile-modal-form"];
-const profileEditCloseButton =
-  profileEditModal.querySelector("#edit-close-button");
-const profileTitle = document.querySelector("#profile-title");
-const profileDescription = document.querySelector("#profile-description");
 const modalTitleInput = document.querySelector("#modal-title-input");
 const modalDescriptionInput = document.querySelector(
   "#modal-description-input"
@@ -23,24 +16,8 @@ const modalDescriptionInput = document.querySelector(
 
 // NEW CARD MODAL
 
-const addCardModal = document.querySelector("#add-card-modal");
 const addCardForm = document.forms["modal-add-form"];
 const addCardButton = document.querySelector("#profile-add-button");
-const addCardCloseButton = addCardModal.querySelector("#add-close-button");
-const cardTitleInput = document.querySelector("#card-title-input");
-const cardUrlInput = document.querySelector("#card-url-input");
-
-// IMAGE MODAL
-
-const imageModal = document.querySelector("#image-modal");
-const cardImageModal = document.querySelector("#image__modal");
-const imageDescriptionModal = document.querySelector("#image-description");
-const imageCloseButton = imageModal.querySelector("#image-close-button");
-const imageModalPrevieWLink = imageModal.querySelector(
-  "modal__container-image"
-);
-
-const modals = document.querySelectorAll(".modal");
 
 
 const cardWrap = document.querySelector(".cards__list");
