@@ -1,27 +1,3 @@
-export const variables = {
-  // PROFILE EDIT MODAL
-  profileEditCloseButton: profileEditModal.querySelector("#edit-close-button"),
-  profileTitle: document.querySelector("#profile-title"),
-  profileDescription: document.querySelector("#profile-description"),
-  profileEditModal: document.querySelector("#profile-edit-modal"),
-
-  // NEW CARD MODAL
-  addCardCloseButton: addCardModal.querySelector("#add-close-button"),
-  cardTitleInput: document.querySelector("#card-title-input"),
-  cardUrlInput: document.querySelector("#card-url-input"),
-  addCardModal: document.querySelector("#add-card-modal"),
-
-  // IMAGE MODAL
-
-  imageModal: document.querySelector("#image-modal"),
-  cardImageModal: document.querySelector("#image__modal"),
-  imageDescriptionModal: document.querySelector("#image-description"),
-  imageCloseButton: imageModal.querySelector("#image-close-button"),
-  imageModalPrevieWLink: imageModal.querySelector("modal__container-image"),
-
-  modals: document.querySelectorAll(".modal"),
-};
-
 export const initialCards = [
   {
     name: "Yosemite Valley",
