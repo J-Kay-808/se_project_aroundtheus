@@ -5,15 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="author" content="Jarad Crowell" />
     <meta name="keywords" content="HTML, CSS, Javascript" />
-    <link rel="stylesheet" href="./pages/index.css" />
-    <link rel="shortcut icon" href="favicon.ico" />
     <title>Around the U.S.</title>
   </head>
   <body class="page">
     <div class="page__content">
       <header class="header page__section">
         <img
-          src="./images/Vector.svg"
+          src="<%=require('./images/Vector.svg')%>"
           class="header__logo"
           alt="Aroud the U.S."
         />
@@ -21,7 +19,7 @@
       <main>
         <section class="profile page__section">
           <img
-            src="./images/jacques-cousteau.jpg"
+            src="<%=require('./images/jacques-cousteau.jpg')%>"
             alt="jacques-cousteau_img"
             class="profile__avatar"
           />
@@ -61,7 +59,7 @@
             type="text"
             name="title"
             id="modal-title-input"
-            class="modal__input modal__title"
+            class= "modal__form-input"
             placeholder="Title"
             required
             minlength="2"
@@ -72,7 +70,7 @@
             type="text"
             name="description"
             id="modal-description-input"
-            class="modal__input modal__description"
+            class="modal__form-input"
             placeholder="Description"
             required
             minlength="2"
@@ -91,12 +89,12 @@
       <div class="modal__container">
         <button class="modal__close" id="add-close-button"></button>
         <p class="modal__heading">New Place</p>
-        <form class="modal__form" name="modal-form" id="add-card-form">
+        <form class="modal__form" name="modal-add-form" id="add-card-form">
           <input
             type="text"
-            name="title"
+            name="name"
             id="card-title-input"
-            class="modal__input add_card_input_title"
+            class="modal__form-input"
             placeholder="Title"
             required
             minlength="1"
@@ -105,9 +103,9 @@
           <span class="modal__error" id="card-title-input-error"></span>
           <input
             type="url"
-            name="url"
+            name="link"
             id="card-url-input"
-            class="modal__input add__modal_input__url"
+            class="modal__form-input"
             placeholder="Image URL"
             required
           />
@@ -139,6 +137,5 @@
         </div>
       </li>
     </template>
-    <script src="./scripts/index.js" type="module"></script>
   </body>
 </html>
