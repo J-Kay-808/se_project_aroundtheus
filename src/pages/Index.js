@@ -128,16 +128,20 @@ function handleImageClick(name, link) {
   modalWithImage.open(name, link);
 }
 
-function handleProfileEditSubmit({ name, description }) {
-  userInfo.setUserInfo({ name, description });
+function handleProfileEditSubmit() {
+  const newName = modalTitleInput.value;
+  const newJob = modalDescriptionInput.value;
+  userInfo.setUserInfo({ name: newName, job: newJob });
   editModal.close();
 }
 
 function handleAddCardSubmit({ }) {
-  const card = renderCard({ name: title, link: url });
+  const name = modalTitleInput.value;
+  const link = cardUrlInput.value;
+  const card = renderCard({ name, link});
   cardSection.addItem(card);
   cardModal.close();
-  addCardForm.reset();
+  addFormValidator.disableButton();
 }
 
 /*                                       */
