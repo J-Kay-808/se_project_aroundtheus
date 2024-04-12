@@ -28,14 +28,11 @@ export default class Card {
     this._cardElement = null;
   }
 
-  _getTemplate() {
-    return document
-      .querySelector(this._cardSelector)
-      .content.firstElementChild.cloneNode(true);
-  }
-
   getView() {
-    this._cardElement = this._getTemplate();
+    this._cardElement = document
+    .querySelector(this._cardSelector)
+    .content.querySelector(".card").cloneNode(true);
+    
     this._cardImageEl = this._cardElement.querySelector(".card__image");
     this._cardTitleEl = this._cardElement.querySelector(".card__title");
     this._deleteButton = this._cardElement.querySelector(".delete__button");

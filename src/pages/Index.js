@@ -111,7 +111,8 @@ const cardSection = new Section(
   {
     items: initialCards,
     validationSettings,
-    renderer: renderCard,
+    renderer:renderCard
+    
   },
 
   ".cards__list"
@@ -132,7 +133,7 @@ function handleProfileEditSubmit({ name, description }) {
   editModal.close();
 }
 
-function handleAddCardSubmit({ title, url }) {
+function handleAddCardSubmit({ }) {
   const card = renderCard({ name: title, link: url });
   cardSection.addItem(card);
   cardModal.close();
@@ -150,4 +151,5 @@ profileEditButton.addEventListener("click", () => {
   editModal.open();
 });
 
-initialCards.forEach((cardData) => renderCard(cardData, cardWrap));
+
+// initialCards.forEach((cardData) => renderCard(cardData, cardWrap));
