@@ -5,13 +5,13 @@ export default class ModalWithImage extends Modal {
     super({ modalSelector });
   }
 
-  open(cardData) {
+  open(data) {
     this._description = this._modalElement.querySelector(".image__description");
     this._image = this._modalElement.querySelector(".image__modal");
 
-    this._description.textContent = cardData.name;
-    this._image.src = cardData.link;
-    this._image.alt = cardData.name;
+    this._description.textContent = data.name;
+    this._image.src = data.link;
+    this._image.alt = data.name;
     super.open();
   }
 }

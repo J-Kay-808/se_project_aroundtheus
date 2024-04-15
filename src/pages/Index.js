@@ -103,8 +103,8 @@ const userInfo = new UserInfo({
 /*                                       */
 
 function renderCard(cardData) {
-  const card = new Card(cardData, cardSelector, handleImageClick);
-  return card.getView();
+  const addCard = new Card(cardData, cardSelector, handleImageClick);
+  return addCard.getView();
 }
 
 const cardSection = new Section(
@@ -128,18 +128,26 @@ function handleImageClick(name, link) {
   modalWithImage.open(name, link);
 }
 
+
+// function handleProfileEditSubmit({name, description}) {
+//   const newName = modalTitleInput.value;
+//   const newJob = modalDescriptionInput.value;
+//   userInfo.setUserInfo({ name, descriptionj});
+//   editModal.close();
+// }
+
+
 function handleProfileEditSubmit() {
-  const newName = modalTitleInput.value;
-  const newJob = modalDescriptionInput.value;
-  userInfo.setUserInfo({ name: newName, job: newJob });
+  profileTitle.textContent = modalTitleInput.value;
+  profileDescription.textContent = modalDescriptionInput.value;
   editModal.close();
 }
 
 function handleAddCardSubmit() {
   const name = modalTitleInput.value;
   const link = cardUrlInput.value;
-  const card = renderCard({ name, link});
-  cardSection.addItem(card);
+  const addCard = renderCard({ name, link});
+  cardSection.addItem(addCard);
   cardModal.close();
   addFormValidator.disableButton();
 }
