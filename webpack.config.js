@@ -8,6 +8,7 @@ module.exports = {
   devtool: "inline-source-map",
   entry: {
     main: "./src/pages/Index.js",
+    favicon: "./src/images/favicon.ico",
   },
   output: {
     path: path.resolve(__dirname, "dist"),
