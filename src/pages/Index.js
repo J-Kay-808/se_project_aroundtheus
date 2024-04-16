@@ -128,15 +128,6 @@ function handleImageClick(name, link) {
   modalWithImage.open(name, link);
 }
 
-
-// function handleProfileEditSubmit({name, description}) {
-//   const newName = modalTitleInput.value;
-//   const newJob = modalDescriptionInput.value;
-//   userInfo.setUserInfo({ name, descriptionj});
-//   editModal.close();
-// }
-
-
 function handleProfileEditSubmit() {
   profileTitle.textContent = modalTitleInput.value;
   profileDescription.textContent = modalDescriptionInput.value;

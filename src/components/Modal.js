@@ -14,7 +14,7 @@ export default class Modal {
   }
 
   close() {
-    this._modalElement.classList.add("modal__close");
+    this._modalElement.classList.remove("modal_opened");
     document.removeEventListener("keydown", this._handleEscClose);
     document.removeEventListener("mousedown", this._handleClickOverlay);
     this._closeButton.removeEventListener("click", this.close);
