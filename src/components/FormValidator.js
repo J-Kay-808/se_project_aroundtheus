@@ -50,7 +50,7 @@ export default class FormValidator {
       this._hideInputError(_inputEl);
     });
     this.disableButton();
-    this._form.reset();
+    // this._form.reset();
   }
 
   enableValidation() {
