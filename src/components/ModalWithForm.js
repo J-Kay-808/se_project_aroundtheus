@@ -6,7 +6,6 @@ export default class ModalWithForm extends Modal {
     this._form = this._modalElement.querySelector(".modal__form");
     this._handleFormSubmit = handleFormSubmit;
     this._inputEls = this._modalElement.querySelectorAll(".modal__form-input");
-    this._handleSubmit = this._handleSubmit.bind(this);
   }
 
   _getInputValues() {
@@ -17,23 +16,13 @@ export default class ModalWithForm extends Modal {
     return this._inputValues;
   }
 
-  _handleSubmit(e) {
-    e.preventDefault();
-    this._handleFormSubmit(this._getInputValues());
-  }
-
-  setEventListeners() {
-    super.setEventListeners();
-  }
 
   open() {
     super.open();
-    this._form.addEventListener("submit", this._handleSubmit);
   }
 
   close() {
     super.close();
-    this._form.removeEventListener("submit", this._handleSubmit);
-   this._form.reset();
+    this._form.reset();
   }
 }

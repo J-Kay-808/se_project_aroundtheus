@@ -143,11 +143,12 @@ function handleProfileEditSubmit() {
   editModal.close();
 }
 
+
 function handleAddCardSubmit() {
-  const name = modalTitleInput.value;
+  const name = cardTitleInput.value;
   const link = cardUrlInput.value;
-  const addCard = renderCard({ name, link});
-  cardSection.addItem(addCard);
+  const newCard = renderCard({ name, link});
+  cardSection.addItem(newCard);
   cardModal.close();
   addFormValidator.disableButton();
 }
@@ -162,6 +163,9 @@ profileEditButton.addEventListener("click", () => {
   modalDescriptionInput.value = currentUserInfo.description;
   editModal.open();
 });
+
+profileEditForm.addEventListener("submit", handleProfileEditSubmit);
+addCardModal.addEventListener("submit", handleAddCardSubmit);
 
 
 // initialCards.forEach((cardData) => renderCard(cardData, cardWrap));

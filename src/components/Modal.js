@@ -40,6 +40,7 @@ export default class Modal {
       }
       if (e.target.classList.contains(".modal__close")) {
         this.close();
+
       }
     });
   }
