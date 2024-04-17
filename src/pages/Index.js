@@ -46,23 +46,22 @@ const cardSelector = "#card-template";
 /*          FormValidator.js             */
 /*                                       */
 
-export const validationSettings = {
-  inputSelector: ".modal__input",
+export const settings = {
+  formSelector: ".modal__form",
+  inputSelector: ".modal__form-input",
   submitButtonSelector: ".modal__button",
   inactiveButtonClass: "modal__button_disabled",
   inputErrorClass: "modal__input_type_error",
   errorClass: "modal__error_visible",
 };
 
-const editFormValidator = new FormValidator(
-  validationSettings,
-  profileEditForm
-);
+const forms = document.querySelectorAll(settings.formSelector);
 
-const addFormValidator = new FormValidator(validationSettings, addCardForm);
+forms.forEach((form) => {
+  const formValidator = new FormValidator(settings, form);
+  formValidator.enableValidation();
+});
 
-editFormValidator.enableValidation();
-addFormValidator.enableValidation();
 
 /*                                       */
 /*           ModalWithForm               */
@@ -110,7 +109,7 @@ function renderCard(cardData) {
 const cardSection = new Section(
   {
     items: initialCards,
-    validationSettings,
+    settings,
     renderer:renderCard
     
   },
@@ -141,7 +140,7 @@ function handleAddCardSubmit() {
   const newCard = renderCard({ name, link});
   cardSection.addItem(newCard);
   cardModal.close();
-  addFormValidator.disableButton();
+  addCardForm.reset();
 }
 
 /*                                       */
@@ -157,6 +156,3 @@ profileEditButton.addEventListener("click", () => {
 
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 addCardModal.addEventListener("submit", handleAddCardSubmit);
-
-
-// initialCards.forEach((cardData) => renderCard(cardData, cardWrap));
