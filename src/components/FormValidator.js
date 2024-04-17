@@ -1,11 +1,15 @@
 export default class FormValidator {
   constructor(settings, formEl) {
+    this._formSelector = settings.formSelector
     this._inputSelector = settings.inputSelector;
     this._submitButtonSelector = settings.submitButtonSelector;
     this._inactiveButtonClass = settings.inactiveButtonClass;
     this._inputErrorClass = settings.inputErrorClass;
     this._errorClass = settings.errorClass;
     this._form = formEl;
+    this._inputEls = [...this._form.querySelectorAll(this._inputSelector)];
+    this._submitButton = this._form.querySelector(this._submitButtonSelector);
+
   }
 
   _showInputError(inputEl) {
@@ -35,12 +39,10 @@ export default class FormValidator {
   }
 
   _setEventListeners() {
-    this._inputEls = [...this._form.querySelectorAll(this._inputSelector)];
-    this._submitButton = this._form.querySelector(this._submitButtonSelector);
     this._inputEls.forEach((_inputEl) => {
       _inputEl.addEventListener("input", () => {
         this._checkInputValidity(_inputEl);
-        this._toggleButtonState();
+        this._toggleButtonState(this._submitButton);
       });
     });
   }

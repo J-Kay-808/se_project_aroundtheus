@@ -6,7 +6,7 @@ export default class Card {
     this._handleImageClick = handleImageClick;
   }
 
-  _setEventListener() {
+  _setEventListeners() {
     this._likeButton.addEventListener("click", () => {
       this._handleLikeIcon();
     });
@@ -42,7 +42,7 @@ export default class Card {
     this._cardImageEl.alt = this._name;
     this._cardTitleEl.textContent = this._name;
 
-    this._setEventListener();
+    this._setEventListeners();
     return this._cardElement;
   }
 }
