@@ -17,12 +17,7 @@ export default class ModalWithForm extends Modal {
   }
 
 
-  open() {
-    super.open();
-  }
-
   close() {
-    this._form.removeEventListener("submit", this._handleFormSubmit);
     super.close();
   }
 
@@ -30,8 +25,7 @@ export default class ModalWithForm extends Modal {
     super.setEventListeners();
     this._form.addEventListener("submit", (e) => {
       e.preventDefault();
-      const userInfo = this._getInputValues();
-      this._handleFormSubmit(userInfo);
+      this._handleFormSubmit( this._getInputValues());
       this._form.reset();
     });
   }

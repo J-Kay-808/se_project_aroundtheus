@@ -109,11 +109,12 @@
 
 .modal__button:hover {
   opacity: 80%;
-  cursor: pointer;
+  cursor: default;
 }
 
 .modal__button:hover:not(:disabled) {
   opacity: 0.8;
+  cursor: pointer;
 }
 
 

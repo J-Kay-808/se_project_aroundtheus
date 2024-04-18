@@ -2,21 +2,19 @@ export default class Modal {
   constructor({ modalSelector }) {
     this._modalElement = document.querySelector(modalSelector);
     this._closeButton = this._modalElement.querySelector(".modal__close");
-    this.close = this.close.bind(this)
+    this.close = this.close.bind(this);
   }
 
   open() {
     this._modalElement.classList.add("modal_opened");
     document.addEventListener("keydown", this._handleEscClose);
     document.addEventListener("mousedown", this._handleClickOverlay);
-
   }
 
   close() {
     this._modalElement.classList.remove("modal_opened");
     document.removeEventListener("keydown", this._handleEscClose);
     document.removeEventListener("mousedown", this._handleClickOverlay);
-
   }
 
   _handleEscClose = (e) => {
@@ -26,7 +24,7 @@ export default class Modal {
   };
 
   _handleClickOverlay = (e) => {
-    if (e.target.classList.contains(".modal")) {
+    if (e.target.classList.contains("modal")) {
       this.close();
     }
   };
@@ -35,13 +33,5 @@ export default class Modal {
     this._closeButton.addEventListener("click", () => {
       this.close();
     });
-
-    this._modalElement.addEventListener("click", (evt) => {
-      if (evt.target.classList.contains("modal")) {
-        this.close();
-      }
-    });
   }
-
-
 }
