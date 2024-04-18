@@ -39,14 +39,12 @@ export const settings = {
   errorClass: "modal__error_visible",
 };
 
-
 const forms = document.querySelectorAll(settings.formSelector);
 
 forms.forEach((form) => {
   const formValidator = new FormValidator(settings, form);
   formValidator.enableValidation();
 });
-
 
 /*                                       */
 /*           ModalWithForm               */
@@ -95,8 +93,7 @@ const cardSection = new Section(
   {
     items: initialCards,
     settings,
-    renderer:renderCard
-    
+    renderer: renderCard,
   },
 
   ".cards__list"
@@ -112,20 +109,20 @@ function handleImageClick(name, link) {
   modalWithImage.open(name, link);
 }
 
-function handleProfileEditSubmit() {
-  profileTitle.textContent = modalTitleInput.value;
-  profileDescription.textContent = modalDescriptionInput.value;
+const user = new UserInfo("#modal-title-input", "#modal-description-input");
+
+function handleProfileEditSubmit(data) {
+  user.setUserInfo({ name: data.title,
+     description: data.description });
   editModal.close();
 }
 
-
-function handleAddCardSubmit() {
-  const name = cardTitleInput.value;
-  const link = cardUrlInput.value;
-  const newCard = renderCard({ name, link});
+function handleAddCardSubmit(userInfo) {
+  const name = userInfo.title;
+  const link = userInfo.link;
+  const newCard = renderCard({ name, link });
   cardSection.addItem(newCard);
   cardModal.close();
-  addCardForm.reset();
 }
 
 /*                                       */
@@ -138,4 +135,3 @@ profileEditButton.addEventListener("click", () => {
   modalDescriptionInput.value = currentUserInfo.description;
   editModal.open();
 });
-

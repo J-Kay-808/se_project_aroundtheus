@@ -24,7 +24,6 @@ export default class ModalWithForm extends Modal {
   close() {
     this._form.removeEventListener("submit", this._handleFormSubmit);
     super.close();
-    console.log(this._form);
   }
 
   setEventListeners() {
