@@ -115,6 +115,14 @@
 .modal__button:hover:not(:disabled) {
   opacity: 0.8;
   cursor: pointer;
+} 
+
+.modal__button_disabled:hover {
+  opacity: 15%;
+}
+
+.modal__button_disabled {
+ opacity: 15%;
 }
 
 
@@ -159,15 +167,6 @@
   border-color: #ff0000;
   visibility: visible;
 }
-
-.modal__button_disabled:hover {
-  opacity: 15%;
-}
-
-.modal__button_disabled {
- opacity: 15%;
-}
-
 
 .modal__error_visible {
   font-size: 12px;

@@ -1,6 +1,6 @@
 export default class FormValidator {
   constructor(settings, formEl) {
-    this._formSelector = settings.formSelector
+    this._formSelector = settings.formSelector;
     this._inputSelector = settings.inputSelector;
     this._submitButtonSelector = settings.submitButtonSelector;
     this._inactiveButtonClass = settings.inactiveButtonClass;
@@ -9,7 +9,6 @@ export default class FormValidator {
     this._form = formEl;
     this._inputEls = [...this._form.querySelectorAll(this._inputSelector)];
     this._submitButton = this._form.querySelector(this._submitButtonSelector);
-
   }
 
   _showInputError(inputEl) {
@@ -18,7 +17,6 @@ export default class FormValidator {
     this._errorMessageEl.textContent = inputEl.validationMessage;
     this._errorMessageEl.classList.add(this._errorClass);
   }
-
 
   _hideInputError(inputEl) {
     this._errorMessageEl = this._form.querySelector(`#${inputEl.id}-error`);
@@ -70,7 +68,8 @@ export default class FormValidator {
   _toggleButtonState() {
     if (this._hasInvalidInput()) {
       this.disableButton();
-    }else {
+      
+    } else {
     this._enableButton();
     }
   }

@@ -5,7 +5,7 @@ import Section from "../components/Section.js";
 import ModalWithForm from "../components/ModalWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import ModalWithImage from "../components/ModalWithImage.js";
-import { initialCards } from "../utils/Constants.js";
+import { initialCards, settings } from "../utils/Constants.js";
 
 // PROFILE EDIT MODAL
 const profileTitle = document.querySelector("#profile-title");
@@ -29,15 +29,6 @@ const cardSelector = "#card-template";
 /*                                       */
 /*          FormValidator.js             */
 /*                                       */
-
-export const settings = {
-  formSelector: ".modal__form",
-  inputSelector: ".modal__form-input",
-  submitButtonSelector: ".modal__button",
-  inactiveButtonClass: ".modal__button_disabled",
-  inputErrorClass: "modal__input_type_error",
-  errorClass: "modal__error_visible",
-};
 
 const forms = document.querySelectorAll(settings.formSelector);
 
@@ -112,8 +103,7 @@ function handleImageClick(name, link) {
 const user = new UserInfo("#modal-title-input", "#modal-description-input");
 
 function handleProfileEditSubmit(data) {
-  user.setUserInfo({ name: data.title,
-     description: data.description });
+  userInfo.setUserInfo({ name: data.title, description: data.description });
   editModal.close();
 }
 
