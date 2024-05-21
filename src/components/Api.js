@@ -12,34 +12,17 @@ export default class Api {
   }
 
   getInitialCards() {
-    return fetch(this.server + "/cards", {
-      headers: {
-        authorization: "ac6a4a1f-f0eb-49da-ad65-e54f994d4e83",
-        method: "GET",
-      },
+    return fetch(`${this.server}/cards`, {
+      headers: this.headers,
+      method: "GET",
     })
-      .then((res) => res.json())
-      .then((result) => {
-        console.log(result);
-        return result;
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    .then(this._checkResponse);
   }
 
   getUserInfo() {
     return fetch(`${this.server}/users/me`, {
       headers: this.headers,
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        console.log(result);
-        return result;
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    }).then(this._checkResponse);
   }
 
   renderCards() {
@@ -51,16 +34,9 @@ export default class Api {
       method: "PATCH",
       headers: this.headers,
       body: JSON.stringify({ name, about }),
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        console.log(result);
-        return result;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then(this._checkResponse);
   }
+
 
   createNewCard(data) {
     return fetch(`${this.server}/cards`, {
