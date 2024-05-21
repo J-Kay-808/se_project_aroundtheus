@@ -6,6 +6,7 @@ import ModalWithForm from "../components/ModalWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import ModalWithImage from "../components/ModalWithImage.js";
 import { initialCards, settings } from "../utils/Constants.js";
+import Api from "../components/Api.js";
 
 // PROFILE EDIT MODAL
 const profileTitle = document.querySelector("#profile-title");
@@ -25,6 +26,19 @@ const addCardForm = document.forms["modal-add-form"];
 const addCardButton = document.querySelector("#profile-add-button");
 
 const cardSelector = "#card-template";
+
+//Api.js
+
+/*                                       */
+/*                Api.JS                 */
+/*                                       */
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "ac6a4a1f-f0eb-49da-ad65-e54f994d4e83",
+    "Content-Type": "application/json",
+  },
+});
 
 /*                                       */
 /*          FormValidator.js             */
@@ -69,22 +83,35 @@ modalWithImage.setEventListeners();
 const userInfo = new UserInfo({
   profileTitle: ".profile__title",
   profileDescription: ".profile__description",
+  avatarSelector: ".profile__avatar",
+});
+
+api.getUserInfo().then((res) => {
+  userInfo.setUserInfo(res.name, res.about);
+  userInfo.setAvatar(res.avatar);
 });
 
 /*                                       */
-/*             card.js                   */
+/*             functions                 */
 /*                                       */
 
-function renderCard(cardData) {
+function createCard(cardData) {
   const addCard = new Card(cardData, cardSelector, handleImageClick);
   return addCard.getView();
 }
+
+api.getInitialCards().then((cards) => {
+  console.log(cards);
+  cards.forEach((card) => {
+    cardSection.addItem(createCard(card));
+  });
+});
 
 const cardSection = new Section(
   {
     items: initialCards,
     settings,
-    renderer: renderCard,
+    renderer: createCard,
   },
 
   ".cards__list"
@@ -100,20 +127,32 @@ function handleImageClick(name, link) {
   modalWithImage.open(name, link);
 }
 
-const user = new UserInfo("#modal-title-input", "#modal-description-input");
 
 function handleProfileEditSubmit(data) {
   userInfo.setUserInfo({ name: data.title, description: data.description });
   editModal.close();
 }
 
-function handleAddCardSubmit(userInfo) {
-  const name = userInfo.title;
-  const link = userInfo.link;
-  const newCard = renderCard({ name, link });
-  cardSection.addItem(newCard);
-  cardModal.close();
+function handleAddCardSubmit(data) {
+  const name = data.title;
+  const link = data.link;
+  cardModal.renderLoading(true);
+  api
+    .createNewCard({name, link})
+    .then((user) => {
+      const cardElement = createCard(user);
+      cardSection.addItem(cardElement);
+      cardModal.close();
+      addCardForm.reset();
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+    .finally(() => {
+      cardModal.renderLoading(false);
+    });
 }
+
 
 /*                                       */
 /*             Event Listeners           */
@@ -125,3 +164,4 @@ profileEditButton.addEventListener("click", () => {
   modalDescriptionInput.value = currentUserInfo.description;
   editModal.open();
 });
+
