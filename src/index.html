@@ -18,11 +18,14 @@
       </header>
       <main>
         <section class="profile page__section">
-          <img
-            src="<%=require('./images/jacques-cousteau.jpg')%>"
-            alt="jacques-cousteau_img"
-            class="profile__avatar"
-          />
+          <div class="profile__image-container">
+            <img
+              src="<%=require('./images/jacques-cousteau.jpg')%>"
+              alt="Profile Photo"
+              class="profile__avatar"
+            />
+            <div class="profile__image-overlay" type="button"></div>
+          </div>
           <div class="profile__info">
             <h1 class="profile__title" id="profile-title">Jacques Cousteau</h1>
             <button
@@ -142,7 +145,6 @@
     </div>
 
     <!-- IMAGE MODAL -->
-
     <div class="modal" id="image-modal">
       <div class="modal__container-image">
         <button class="modal__close" id="image-close-button"></button>
@@ -151,6 +153,7 @@
       </div>
     </div>
 
+    <!-- CARD TEMPLATE -->
     <template id="card-template">
       <li class="card">
         <img src="" alt="" class="card__image" />

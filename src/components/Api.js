@@ -37,6 +37,14 @@ export default class Api {
     }).then(this._checkResponse);
   }
 
+  updateAvatar(avatar) {
+    return fetch(`${this.server}/users/me/avatar`, {
+      method: "PATCH",
+      headers: this.headers,
+      body: JSON.stringify({ avatar }),
+    }).then(this._checkResponse);
+  }
+
 
   createNewCard(data) {
     return fetch(`${this.server}/cards`, {
@@ -48,4 +56,5 @@ export default class Api {
       }),
     }).then(this._checkResponse);
   }
+
 }

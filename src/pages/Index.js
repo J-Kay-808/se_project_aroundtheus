@@ -17,6 +17,9 @@ const modalTitleInput = document.querySelector("#modal-title-input");
 const modalDescriptionInput = document.querySelector(
   "#modal-description-input"
 );
+const profileAvatarContainer = document.querySelector(
+  ".profile__image-overlay"
+);
 
 // NEW CARD MODAL
 const cardTitleInput = document.querySelector("#card-title-input");
@@ -69,6 +72,10 @@ addCardButton.addEventListener("click", () => {
   cardModal.open();
 });
 
+profileAvatarContainer.addEventListener("click", () => {
+  editAvatarModal.open();
+});
+
 /*                                       */
 /*          ModalWithImage               */
 /*                                       */
@@ -86,9 +93,11 @@ const userInfo = new UserInfo({
   avatarSelector: ".profile__avatar",
 });
 
-api.getUserInfo().then((res) => {
-  userInfo.setUserInfo(res.name, res.about);
-  userInfo.setAvatar(res.avatar);
+api.getUserInfo().then((data) => {
+  userInfo.setUserInfo(data.name, data.description);
+})
+.catch((err) => {
+  console.error(err);
 });
 
 /*                                       */
@@ -143,10 +152,30 @@ function handleProfileEditSubmit(data) {
     });
 }
 
-// function handleProfileEditSubmit(data) {
-//   userInfo.setUserInfo({ name: data.title, description: data.description });
-//   editModal.close();
-// }
+const handleAvatarSubmit = ({ avatar }) => {
+  console.log(avatar);
+  editAvatarModal.renderLoading(true);
+  api
+    .updateAvatar(avatar)
+    .then((data) => {
+      userInfo.setUserInfo(data);
+      editAvatarModal.close();
+      editAvatarModal.ModalWithForm.reset();
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+    .finally(() => {
+      editAvatarModal.renderLoading(false);
+    });
+};
+
+const editAvatarModal = new ModalWithForm(
+  "#edit-avatar-modal",
+  handleAvatarSubmit
+);
+editAvatarModal.setEventListeners();
+
 
 function handleAddCardSubmit(data) {
   const name = data.title;

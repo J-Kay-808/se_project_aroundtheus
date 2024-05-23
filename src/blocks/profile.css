@@ -14,6 +14,39 @@
   background-position: center;
 }
 
+.profile__image-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile__image-overlay {
+  background-color: transparent;
+  box-sizing: content-box;
+  border: none;
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  top: 0;
+  left: 0;
+  width: 120px;
+  height: 120px;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+}
+
+.profile__image-container:hover .profile__image-overlay {
+  background: url(../images/Edit\ Button.svg) center no-repeat;
+  visibility: visible;
+  background-color: black;
+  cursor: pointer;
+  opacity: 0.6;
+}
+
 .profile__info {
   display: grid;
   grid-template-areas:
