@@ -7,6 +7,7 @@ import UserInfo from "../components/UserInfo.js";
 import ModalWithImage from "../components/ModalWithImage.js";
 import { initialCards, settings } from "../utils/Constants.js";
 import Api from "../components/Api.js";
+import ModalWithConfirm from "../components/ModalWithConfirm.js";
 
 // PROFILE EDIT MODAL
 const profileTitle = document.querySelector("#profile-title");
@@ -18,10 +19,11 @@ const modalDescriptionInput = document.querySelector(
   "#modal-description-input"
 );
 
-//AVATAR
+// AVATAR
 const profileAvatarContainer = document.querySelector(
   ".profile__image-overlay"
 );
+
 
 // NEW CARD MODAL
 const cardTitleInput = document.querySelector("#card-title-input");
@@ -65,7 +67,7 @@ api
 /*                                       */
 
 function createCard(cardData) {
-  const addCard = new Card(cardData, cardSelector, handleImageClick, handleLikeClick, handleDislike, handleDeleteButton);
+  const addCard = new Card(cardData, cardSelector, handleImageClick, handleLikeClick, handleDislike, handleDeleteClick);
   return addCard.getView();
 }
 
@@ -246,26 +248,31 @@ function handleAddCardSubmit(data) {
       cardModal.renderLoading(false);
     });
 }
-
-const deleteCardModal = new ModalWithForm("#delete-modal");
+const deleteCardModal = new ModalWithConfirm("#delete-modal");
 deleteCardModal.setEventListeners();
 
-function handleDeleteButton(card) {
+
+function handleDeleteClick(card) {
   deleteCardModal.open();
-  deleteCardModal.setSubmitAction(() => {
+  deleteCardModal.setSubmit(() => {
+    console.log(card)
     api
       .deleteCard(card._id)
       .then(() => {
+        console.log("Card deleted successfully");
         deleteCardModal.close();
-        card.handleDeleteCard();
+        // card.handleDeleteIcon();
       })
-      .catch(console.error);
+      .catch((error) => {
+        console.error("Error deleting card:", error);
+      });
   });
 }
 
-const handleLikeButton = (cardData) => {
-  console.log(cardData.getLikeStatus());
-};
+
+// const handleLikeButton = (cardData) => {
+//   console.log(cardData.getLikeStatus());
+// };
 
 /*                                       */
 /*             Event Listeners           */
