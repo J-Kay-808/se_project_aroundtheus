@@ -178,6 +178,24 @@
   visibility: visible;
 }
 
+/* .modal__container_delete {
+  min-width: 430px;
+  max-height: 181px;
+  margin-top: 270px;
+  padding: 34px;
+  display: flex;
+  align-items: center;
+}
+
+.modal__button {
+  width: 100%;
+  min-height: 46px;
+  padding: 0;
+  margin: 0;
+}
+ */
+
+
 
 @media screen and (max-width: 400px) {
   .modal__container {
@@ -221,4 +239,9 @@
     line-height: 17px;  
     width: 238px;
   }
+
+  .modal__form_delete{
+    margin-top: 0;
+  }
+
 }

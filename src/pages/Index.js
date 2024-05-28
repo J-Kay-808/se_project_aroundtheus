@@ -17,6 +17,8 @@ const modalTitleInput = document.querySelector("#modal-title-input");
 const modalDescriptionInput = document.querySelector(
   "#modal-description-input"
 );
+
+//AVATAR
 const profileAvatarContainer = document.querySelector(
   ".profile__image-overlay"
 );
@@ -27,10 +29,12 @@ const cardUrlInput = document.querySelector("#card-url-input");
 const addCardModal = document.querySelector("#add-card-modal");
 const addCardForm = document.forms["modal-add-form"];
 const addCardButton = document.querySelector("#profile-add-button");
-
 const cardSelector = "#card-template";
 
-//Api.js
+// FORMS
+const forms = document.querySelectorAll(settings.formSelector);
+
+
 
 /*                                       */
 /*                Api.JS                 */
@@ -43,11 +47,53 @@ const api = new Api({
   },
 });
 
+api
+  .getUserInfo()
+  .then((data) => {
+    userInfo.setUserInfo(data.name, data.about);
+    userInfo.setUserInfo(data.avatar);
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+
+
+
+
+/*                                       */
+/*                Cards                  */
+/*                                       */
+
+function createCard(cardData) {
+  const addCard = new Card(cardData, cardSelector, handleImageClick, handleLikeClick, handleDislike, handleDeleteButton);
+  return addCard.getView();
+}
+
+api.getInitialCards().then((cards) => {
+  console.log(cards);
+  cards.forEach((card) => {
+    cardSection.addItem(createCard(card));
+  });
+});
+
+const cardSection = new Section(
+  {
+    items: initialCards,
+    settings,
+    renderer: createCard,
+  },
+
+  ".cards__list"
+);
+
+cardSection.renderItems();
+
+
+
 /*                                       */
 /*          FormValidator.js             */
 /*                                       */
 
-const forms = document.querySelectorAll(settings.formSelector);
 
 forms.forEach((form) => {
   const formValidator = new FormValidator(settings, form);
@@ -72,9 +118,6 @@ addCardButton.addEventListener("click", () => {
   cardModal.open();
 });
 
-profileAvatarContainer.addEventListener("click", () => {
-  editAvatarModal.open();
-});
 
 /*                                       */
 /*          ModalWithImage               */
@@ -93,70 +136,18 @@ const userInfo = new UserInfo({
   avatarSelector: ".profile__avatar",
 });
 
-api.getUserInfo().then((data) => {
-  userInfo.setUserInfo(data.name, data.description);
-})
-.catch((err) => {
-  console.error(err);
-});
 
 /*                                       */
-/*             functions                 */
+/*              avatar                   */
 /*                                       */
 
-function createCard(cardData) {
-  const addCard = new Card(cardData, cardSelector, handleImageClick);
-  return addCard.getView();
-}
 
-api.getInitialCards().then((cards) => {
-  console.log(cards);
-  cards.forEach((card) => {
-    cardSection.addItem(createCard(card));
-  });
-});
 
-const cardSection = new Section(
-  {
-    items: initialCards,
-    settings,
-    renderer: createCard,
-  },
-
-  ".cards__list"
-);
-
-cardSection.renderItems();
-
-/*                                       */
-/*             Event Handlers            */
-/*                                       */
-
-function handleImageClick(name, link) {
-  modalWithImage.open(name, link);
-}
-
-function handleProfileEditSubmit(data) {
-  editModal.renderLoading(true);
-  api
-    .updateProfileInfo(data.title, data.description)
-    .then((res) => {
-      userInfo.setUserInfo({name: res.name, description: res.about});
-      editModal.close();
-    })
-    .catch((err) => {
-      console.error(err);
-    })
-    .finally(() => {
-      editModal.renderLoading(false);
-    });
-}
-
-const handleAvatarSubmit = ({ avatar }) => {
+const handleAvatarSubmit = (inputValues) => {
   console.log(avatar);
   editAvatarModal.renderLoading(true);
   api
-    .updateAvatar(avatar)
+    .updateAvatar(inputValues.avatar)
     .then((data) => {
       userInfo.setUserInfo(data);
       editAvatarModal.close();
@@ -174,7 +165,66 @@ const editAvatarModal = new ModalWithForm(
   "#edit-avatar-modal",
   handleAvatarSubmit
 );
-editAvatarModal.setEventListeners();
+// editAvatarModal.setEventListeners();
+
+
+profileAvatarContainer.addEventListener("click", () => {
+  editAvatarModal.open();
+});
+
+
+
+/*                                       */
+/*             functions                 */
+/*                                       */
+
+
+function handleLikeClick(card) {
+  api
+    .addLike(card.getCardId())
+    .then(() => {
+      card.like();
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+}
+
+function handleDislike(card) {
+  api
+    .removeLike(card.getCardId())
+    .then(() => {
+      card.dislike();
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+}
+
+/*                                       */
+/*             Event Handlers            */
+/*                                       */
+
+function handleImageClick(name, link) {
+  modalWithImage.open(name, link);
+}
+
+function handleProfileEditSubmit(data) {
+  editModal.renderLoading(true);
+  api
+    .updateProfileInfo(data.title, data.description)
+    .then((res) => {
+      userInfo.setUserInfo({ name: res.name, description: res.about });
+      editModal.close();
+      // editModal.reset();
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+    .finally(() => {
+      editModal.renderLoading(false);
+    });
+}
 
 
 function handleAddCardSubmit(data) {
@@ -196,6 +246,26 @@ function handleAddCardSubmit(data) {
       cardModal.renderLoading(false);
     });
 }
+
+const deleteCardModal = new ModalWithForm("#delete-modal");
+deleteCardModal.setEventListeners();
+
+function handleDeleteButton(card) {
+  deleteCardModal.open();
+  deleteCardModal.setSubmitAction(() => {
+    api
+      .deleteCard(card._id)
+      .then(() => {
+        deleteCardModal.close();
+        card.handleDeleteCard();
+      })
+      .catch(console.error);
+  });
+}
+
+const handleLikeButton = (cardData) => {
+  console.log(cardData.getLikeStatus());
+};
 
 /*                                       */
 /*             Event Listeners           */

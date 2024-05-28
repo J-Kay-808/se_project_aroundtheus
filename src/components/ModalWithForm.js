@@ -11,11 +11,11 @@ export default class ModalWithForm extends Modal {
   }
 
   _getInputValues() {
-    this._inputValues = {};
+    this.inputValues = {};
     this._inputEl.forEach((input) => {
-      this._inputValues[input.name] = input.value;
+      this.inputValues[input.name] = input.value;
     });
-    return this._inputValues;
+    return this.inputValues;
   }
 
 
@@ -25,6 +25,10 @@ export default class ModalWithForm extends Modal {
     } else {
       this._modalButton.textContent = "Save";
     }
+  }
+
+  setSubmit(handleSubmit) {
+    this._handleFormSubmit = handleSubmit;
   }
 
 
