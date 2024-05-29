@@ -1,4 +1,4 @@
-export default class UserInfo {
+ export default class UserInfo {
   constructor({ profileTitle, profileDescription, avatarSelector}) {
     this.name = document.querySelector(profileTitle);
     this._description = document.querySelector(profileDescription);
@@ -20,6 +20,10 @@ export default class UserInfo {
     this.name.textContent = name;
     this._description.textContent = description;
     this._avatarElement.src = avatar;
+  }
+
+  updateAvatar(avatarUrl) {
+    this._avatarElement.src = avatarUrl;
   }
 
 }

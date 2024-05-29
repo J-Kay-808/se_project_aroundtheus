@@ -22,6 +22,9 @@ const modalDescriptionInput = document.querySelector(
 const profileAvatarContainer = document.querySelector(
   ".profile__image-overlay"
 );
+const editProfileSaveButton = document.querySelector(
+  "#edit-profile-modal-save-button"
+);
 
 // NEW CARD MODAL
 const cardTitleInput = document.querySelector("#card-title-input");
@@ -40,20 +43,10 @@ const forms = document.querySelectorAll(settings.formSelector);
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
   headers: {
-    authorization: "5bac166b-52f8-4884-865b-4a04f97e7da7",
+    authorization: "5f4ef148-bee1-40be-bb22-88d989208c73",
     "Content-Type": "application/json",
   },
 });
-
-api
-  .getUserInfo()
-  .then((data) => {
-    userInfo.setUserInfo(data.name, data.about);
-    userInfo.setUserInfo(data.avatar);
-  })
-  .catch((err) => {
-    console.error(err);
-  });
 
 /*                                       */
 /*                Cards                  */
@@ -71,12 +64,17 @@ function createCard(cardData) {
   return addCard.getView();
 }
 
-api.getInitialCards().then((cards) => {
-  console.log(cards);
-  cards.forEach((card) => {
-    cardSection.addItem(createCard(card));
+api
+  .getInitialCards()
+  .then((cards) => {
+    console.log(cards);
+    cards.forEach((card) => {
+      cardSection.addItem(createCard(card));
+    });
+  })
+  .catch((err) => {
+    console.error(err);
   });
-});
 
 const cardSection = new Section(
   {
@@ -109,19 +107,12 @@ const enableValidation = (settings) => {
 
 enableValidation(settings);
 
-
 /*                                       */
 /*           ModalWithForm               */
 /*                                       */
 
-const editModal = new ModalWithForm(
-  "#profile-edit-modal",
-  handleProfileEditSubmit
-);
-
 const cardModal = new ModalWithForm("#add-card-modal", handleAddCardSubmit);
 
-editModal.setEventListeners();
 cardModal.setEventListeners();
 
 addCardButton.addEventListener("click", () => {
@@ -138,6 +129,18 @@ modalWithImage.setEventListeners();
 /*                                       */
 /*             UserInfo                  */
 /*                                       */
+api
+  .getUserInfo()
+  .then((userData) => {
+    userInfo.setUserInfo({
+      name: userData.name,
+      description: userData.about,
+      avatar: userData.avatar,
+    });
+  })
+  .catch((err) => {
+    console.error("Failed to load user information:", err);
+  });
 
 const userInfo = new UserInfo({
   profileTitle: ".profile__title",
@@ -146,22 +149,54 @@ const userInfo = new UserInfo({
 });
 
 /*                                       */
+/*           ProfileEditModal            */
+/*                                       */
+
+const editModal = new ModalWithForm(
+  "#profile-edit-modal",
+  // "#edit-profile-modal-save-button",
+  handleProfileEditSubmit
+);
+
+editModal.setEventListeners();
+
+function handleProfileEditSubmit(formData) {
+  editModal.renderLoading(true);
+  api
+    .updateProfileInfo({ name: formData.title, about: formData.description })
+    .then(() => {
+      userInfo.setUserInfo({
+        name: formData.title,
+        description: formData.description,
+        avatar: userInfo.getUserInfo().avatar,
+      });
+      editModal.close();
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+    .finally(() => {
+      editModal.renderLoading(false);
+    });
+}
+
+/*                                       */
 /*              avatar                   */
 /*                                       */
 
-const handleAvatarSubmit = ({ avatar }) => {
+const handleAvatarSubmit = ({ link: avatar }) => {
   console.log(avatar);
   editAvatarModal.renderLoading(true);
   api
     .updateAvatar(avatar)
-    .then((data) => {
-      userInfo.setUserInfo(data);
+    .then((res) => {
+      userInfo.updateAvatar(res.avatar);
       formValidators["edit-avatar-form"].disableButton();
       formValidators["edit-avatar-form"].resetForms();
       editAvatarModal.close();
     })
     .catch((err) => {
-      console.error(err);
+      console.error("Failed to update user avatar:", err);
     })
     .finally(() => {
       editAvatarModal.renderLoading(false);
@@ -204,29 +239,13 @@ function handleDislikeCard(card) {
     });
 }
 
-/*                                       */
-/*             Event Handlers            */
-/*                                       */
-
 function handleImageClick(name, link) {
   modalWithImage.open(name, link);
 }
 
-function handleProfileEditSubmit(data) {
-  editModal.renderLoading(true);
-  api
-    .updateProfileInfo(data.title, data.description)
-    .then((res) => {
-      userInfo.setUserInfo({ name: res.name, description: res.about });
-      editModal.close();
-    })
-    .catch((err) => {
-      console.error(err);
-    })
-    .finally(() => {
-      editModal.renderLoading(false);
-    });
-}
+/*                                       */
+/*              ADD CARD                 */
+/*                                       */
 
 function handleAddCardSubmit(data) {
   const name = data.title;
@@ -248,6 +267,10 @@ function handleAddCardSubmit(data) {
     });
 }
 
+/*                                       */
+/*            DELETE CARD                */
+/*                                       */
+
 const deleteCardModal = new ModalWithForm("#delete-modal");
 deleteCardModal.setEventListeners();
 
@@ -264,7 +287,9 @@ function handleDeleteCard(card) {
         card.handleDeleteButton();
       })
       .catch((error) => {
-        console.error("Error deleting card:", error);
+        console
+          .error("Error deleting card:", error)
+          .finally(() => confirmation.setSubmitText(false));
       });
   });
 }

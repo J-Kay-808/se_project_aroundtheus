@@ -37,7 +37,7 @@ export default class Card {
   }
 
 
-  _handleDeleteIcon() {
+  _handleDeleteIcon (){
     this._cardElement.remove();
     this._cardElement = null;
   }
