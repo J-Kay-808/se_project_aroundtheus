@@ -9,13 +9,13 @@ export default class Api {
       return res.json();
     }
     return Promise.reject(`Error ${res.status}`);
-  }  
+  }
 
   getInitialCards() {
     return fetch(`${this.server}/cards`, {
       headers: this.headers,
     })
-    .then(this._checkResponse)
+      .then(this._checkResponse)
       .then((result) => {
         return result;
       });
@@ -24,31 +24,32 @@ export default class Api {
   getUserInfo() {
     return fetch(`${this.server}/users/me`, {
       headers: this.headers,
-    }) .then(this._checkResponse)
-    .then((userData) => {
-      return userData;
-    });
-}
+    })
+      .then(this._checkResponse)
+      .then((userData) => {
+        return userData;
+      });
+  }
 
   renderCards() {
     return Promise.all(this.getUserInfo(), this.getInitialCards());
   }
 
-updateProfileInfo({name, about}) {
+  updateProfileInfo({ name, about }) {
     return fetch(`${this.server}/users/me`, {
       method: "PATCH",
       headers: this.headers,
       body: JSON.stringify({ name, about }),
-    }) .then((result) => {
+    }).then((result) => {
       return result;
     });
-}
+  }
 
   updateAvatar(avatar) {
     return fetch(`${this.server}/users/me/avatar`, {
       method: "PATCH",
       headers: this.headers,
-      body: JSON.stringify({ avatar }),
+      body: JSON.stringify(avatar),
     }).then(this._checkResponse);
   }
 
@@ -83,11 +84,4 @@ updateProfileInfo({name, about}) {
       headers: this.headers,
     }).then(this._checkResponse);
   }
-
-  // debug() {
-  //   fetch("http://localhost:8080/some-endpoint")
-  //     .then((response) => response.json())
-  //     .then((data) => console.log(data))
-  //     .catch((error) => console.error("Error:", error));
-  // }
 }

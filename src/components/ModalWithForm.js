@@ -10,11 +10,11 @@ export default class ModalWithForm extends Modal {
   }
 
   _getInputValues() {
-    this.inputValues = {};
+    const inputValues = {};
     this._inputEl.forEach((input) => {
-      this.inputValues[input.name] = input.value;
+      inputValues[input.name] = input.value;
     });
-    return this.inputValues;
+    return inputValues;
   }
 
 
@@ -35,9 +35,6 @@ export default class ModalWithForm extends Modal {
     });
   }
 
-  setSubmit(handleSubmit) {
-    this._handleFormSubmit = handleSubmit;
-  }
 
 }
  

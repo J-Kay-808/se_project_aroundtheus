@@ -7,6 +7,7 @@ import UserInfo from "../components/UserInfo.js";
 import ModalWithImage from "../components/ModalWithImage.js";
 import { initialCards, settings } from "../utils/Constants.js";
 import Api from "../components/Api.js";
+import ModalWithConfirm from "../components/ModalWithConfirm.js";
 
 // PROFILE EDIT MODAL
 const profileTitle = document.querySelector("#profile-title");
@@ -57,9 +58,8 @@ function createCard(cardData) {
     cardData,
     cardSelector,
     handleImageClick,
-    handleLikeCard,
-    handleDislikeCard,
-    handleDeleteCard
+    handleLikeClick,
+    handleDeleteClick
   );
   return addCard.getView();
 }
@@ -154,7 +154,6 @@ const userInfo = new UserInfo({
 
 const editModal = new ModalWithForm(
   "#profile-edit-modal",
-  // "#edit-profile-modal-save-button",
   handleProfileEditSubmit
 );
 
@@ -184,15 +183,14 @@ function handleProfileEditSubmit(formData) {
 /*              avatar                   */
 /*                                       */
 
-const handleAvatarSubmit = ({ link: avatar }) => {
-  console.log(avatar);
+function handleAvatarSubmit(data) {
   editAvatarModal.renderLoading(true);
   api
-    .updateAvatar(avatar)
+    .updateAvatar({ avatar: data.link })
     .then((res) => {
       userInfo.updateAvatar(res.avatar);
-      formValidators["edit-avatar-form"].disableButton();
-      formValidators["edit-avatar-form"].resetForms();
+      // formValidators["edit-avatar-form"].disableButton();
+      // formValidators["edit-avatar-form"].resetForms();
       editAvatarModal.close();
     })
     .catch((err) => {
@@ -201,7 +199,7 @@ const handleAvatarSubmit = ({ link: avatar }) => {
     .finally(() => {
       editAvatarModal.renderLoading(false);
     });
-};
+}
 
 const editAvatarModal = new ModalWithForm(
   "#edit-avatar-modal",
@@ -217,26 +215,49 @@ profileAvatarContainer.addEventListener("click", () => {
 /*          LIKE & DISLIKE               */
 /*                                       */
 
-function handleLikeCard(card) {
-  api
-    .addLike(card.getCardId())
-    .then(() => {
-      card.like();
-    })
-    .catch((err) => {
-      console.error(err);
-    });
-}
-
-function handleDislikeCard(card) {
-  api
-    .removeLike(card.getCardId())
-    .then(() => {
-      card.dislike();
-    })
-    .catch((err) => {
-      console.error(err);
-    });
+// function handleLikeClick(card) {
+//   if (card.isLiked === true) {
+//     api
+//       .removeLike(card._id)
+//       .then((res) => {
+//         card.isLiked = false;
+//         card.handleLikeIcon();
+//       })
+//       .catch(console.error);
+//   } else {
+//     api
+//       .addLike(card._id)
+//       .then((res) => {
+//         card.isLiked = true;
+//         card.handleLikeIcon();
+//       })
+//       .catch(console.error);
+//   }
+// }
+function handleLikeClick(card) {
+  console.log(card);
+  if (card.isLiked) {
+    api
+      .removeLike(card._id)
+      .then(() => {
+        card.handleLikeIcon();
+        card.isLiked = false;
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+  if (!card.isLiked) {
+    api
+      .addLike(card._id)
+      .then(() => {
+        card.handleLikeIcon();
+        card.isLiked = true;
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
 }
 
 function handleImageClick(name, link) {
@@ -271,20 +292,19 @@ function handleAddCardSubmit(data) {
 /*            DELETE CARD                */
 /*                                       */
 
-const deleteCardModal = new ModalWithForm("#delete-modal");
-deleteCardModal.setEventListeners();
+const confirmDeleteModal = new ModalWithConfirm("#delete-modal");
+confirmDeleteModal.setEventListeners();
 
-function handleDeleteCard(card) {
-  deleteCardModal.open();
-  deleteCardModal.setSubmit(() => {
-    console.log(card);
+function handleDeleteClick(card) {
+  confirmDeleteModal.open();
+  confirmDeleteModal.setSubmit(() => {
+    // console.log(card);
     api
       .deleteCard(card._id)
       .then(() => {
-        console.log("Card deleted successfully");
-        card.removeCard();
-        deleteCardModal.close();
-        card.handleDeleteButton();
+        // console.log("Card deleted successfully");
+        confirmDeleteModal.close();
+        card.handleDeleteCard();
       })
       .catch((error) => {
         console
