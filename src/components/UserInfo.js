@@ -21,7 +21,7 @@
     this._description.textContent = description;
   }
 
-  updatedAvatar(avatarUrl) {
+  setAvatar(avatarUrl) {
     this._avatarElement.src = avatarUrl;
   }
 

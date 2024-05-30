@@ -120,18 +120,17 @@ modalWithImage.setEventListeners();
 /*                                       */
 /*             UserInfo                  */
 /*                                       */
+
 api
   .getUserInfo()
-  .then((userData) => {
-    userInfo.setUserInfo({
-      name: userData.name,
-      description: userData.about,
-      avatar: userData.avatar,
-    });
+  .then((res) => {
+    userInfo.setUserInfo({name: res.name, description: res.about});
+    userInfo.setAvatar(res.avatar);
   })
   .catch((err) => {
-    console.error("Failed to load user information:", err);
+    console.error(err);
   });
+
 
 const userInfo = new UserInfo({
   profileTitle: ".profile__title",
@@ -158,7 +157,6 @@ function handleProfileEditSubmit(formData) {
       userInfo.setUserInfo({
         name: formData.title,
         description: formData.description,
-        avatar: userInfo.getUserInfo().avatar,
       });
       editModal.close();
     })
@@ -179,9 +177,7 @@ function handleAvatarSubmit(data) {
   api
     .updateAvatar({ avatar: data.link })
     .then((res) => {
-      userInfo.updatedAvatar(res.avatar);
-      // formValidators["edit-avatar-form"].disableButton();
-      // formValidators["edit-avatar-form"].resetForms();
+      userInfo.setAvatar(res.avatar);
       editAvatarModal.close();
     })
     .catch((err) => {
@@ -207,20 +203,18 @@ profileAvatarContainer.addEventListener("click", () => {
 /*                                       */
 
 function handleLikeClick(card) {
-  if (card.setIsLiked === true) {
+  if (card.getIsLiked()) {
     api
       .removeLike(card._id)
       .then(() => {
-        card.setIsLiked = false;
-        // card.handleLikeIcon();
+        card.setIsLiked(true);
       })
       .catch(console.error);
   } else {
     api
       .addLike(card._id)
       .then(() => {
-        card.setIsLiked = true;
-        // card.handleLikeIcon();
+        card.setIsLiked(false);
       })
       .catch(console.error);
   }
@@ -261,21 +255,19 @@ function handleAddCardSubmit(data) {
 const confirmDeleteModal = new ModalWithConfirm("#delete-modal");
 confirmDeleteModal.setEventListeners();
 
-function handleDeleteClick(card) {
+function handleDeleteClick(cardData) {
   confirmDeleteModal.open();
   confirmDeleteModal.handleDelete(() => {
-    console.log(card);
+    console.log(cardData);
     api
-      .deleteCard(card._id)
+      .deleteCard(cardData._id)
       .then(() => {
         console.log("Card deleted successfully");
+        cardData.handleDeleteCard();
         confirmDeleteModal.close();
-        card.handleDeleteCard();
       })
       .catch((err) => {
-        console
-          .error("Error deleting card:", err)
-          .finally(() => confirmation.setSubmitText(false));
+        console.error("Error deleting card:", err);
       });
   });
 }

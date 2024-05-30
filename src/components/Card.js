@@ -14,6 +14,10 @@ export default class Card {
   getCardId() {
     return this._id;
   }
+
+  getIsLiked() {
+    return this._isLiked;
+  }
   
   _setEventListeners() {
     this._likeButton.addEventListener("click", () => {
@@ -28,6 +32,8 @@ export default class Card {
       this._handleImageClick({name: this.name, link: this.link});
     });
   }
+
+
 
   setIsLiked(isLiked) { 
      this._isLiked = isLiked; 
