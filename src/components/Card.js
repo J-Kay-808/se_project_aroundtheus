@@ -7,8 +7,8 @@ export default class Card {
     this.isLiked = data.isLiked;
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
-    this._handleDeleteClick = handleDeleteClick;
     this._handleLikeClick = handleLikeClick;
+    this._handleDeleteClick = handleDeleteClick;
   } 
 
   getCardId() {

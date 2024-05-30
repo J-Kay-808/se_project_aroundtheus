@@ -59,7 +59,7 @@ function createCard(cardData) {
     cardSelector,
     handleImageClick,
     handleLikeClick,
-    handleDeleteClick
+    handleDeleteClick,
   );
   return addCard.getView();
 }
@@ -215,50 +215,50 @@ profileAvatarContainer.addEventListener("click", () => {
 /*          LIKE & DISLIKE               */
 /*                                       */
 
-// function handleLikeClick(card) {
-//   if (card.isLiked === true) {
-//     api
-//       .removeLike(card._id)
-//       .then((res) => {
-//         card.isLiked = false;
-//         card.handleLikeIcon();
-//       })
-//       .catch(console.error);
-//   } else {
-//     api
-//       .addLike(card._id)
-//       .then((res) => {
-//         card.isLiked = true;
-//         card.handleLikeIcon();
-//       })
-//       .catch(console.error);
-//   }
-// }
 function handleLikeClick(card) {
-  console.log(card);
-  if (card.isLiked) {
+  if (card.isLiked === true) {
     api
       .removeLike(card._id)
       .then(() => {
-        card.handleLikeIcon();
         card.isLiked = false;
+        card.handleLikeIcon();
       })
-      .catch((err) => {
-        console.error(err);
-      });
-  }
-  if (!card.isLiked) {
+      .catch(console.error);
+  } else {
     api
       .addLike(card._id)
       .then(() => {
-        card.handleLikeIcon();
         card.isLiked = true;
+        card.handleLikeIcon();
       })
-      .catch((err) => {
-        console.error(err);
-      });
+      .catch(console.error);
   }
 }
+// function handleLikeClick(card) {
+//   console.log(card);
+//   if (card.isLiked) {
+//     api
+//       .removeLike(card._id)
+//       .then(() => {
+//         card.handleLikeIcon();
+//         card.isLiked = false;
+//       })
+//       .catch((err) => {
+//         console.error(err);
+//       });
+//   }
+//   if (!card.isLiked) {
+//     api
+//       .addLike(card._id)
+//       .then(() => {
+//         card.handleLikeIcon();
+//         card.isLiked = true;
+//       })
+//       .catch((err) => {
+//         console.error(err);
+//       });
+//   }
+// }
 
 function handleImageClick(name, link) {
   modalWithImage.open(name, link);
@@ -297,12 +297,12 @@ confirmDeleteModal.setEventListeners();
 
 function handleDeleteClick(card) {
   confirmDeleteModal.open();
-  confirmDeleteModal.setSubmit(() => {
-    // console.log(card);
+  confirmDeleteModal.handleDelete(() => {
+    console.log(card);
     api
       .deleteCard(card._id)
       .then(() => {
-        // console.log("Card deleted successfully");
+        console.log("Card deleted successfully");
         confirmDeleteModal.close();
         card.handleDeleteCard();
       })

@@ -75,13 +75,17 @@ export default class Api {
     return fetch(`${this.server}/cards/${cardId}/likes`, {
       method: "PUT",
       headers: this.headers,
-    }).then(this._checkResponse);
+    })
+      .then(this._checkResponse)
+      .then(() => console.log("Card has been liked"));
   }
 
   removeLike(cardId) {
     return fetch(`${this.server}/cards/${cardId}/likes`, {
       method: "DELETE",
       headers: this.headers,
-    }).then(this._checkResponse);
+    })
+      .then(this._checkResponse)
+      .then(() => console.log("Card is not yet liked"));
   }
 }
