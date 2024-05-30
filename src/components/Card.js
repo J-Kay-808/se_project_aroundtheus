@@ -21,10 +21,12 @@ export default class Card {
   
   _setEventListeners() {
     this._likeButton.addEventListener("click", () => {
+      console.log('Like button clicked', this);
       this._handleLikeClick(this);
     });
 
     this._deleteButton.addEventListener("click", () => {
+      console.log('Delete button clicked', this);
       this._handleDeleteClick(this);
     });
 

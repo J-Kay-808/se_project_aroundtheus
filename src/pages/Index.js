@@ -205,16 +205,19 @@ profileAvatarContainer.addEventListener("click", () => {
 function handleLikeClick(card) {
   if (card.getIsLiked()) {
     api
-      .removeLike(card._id)
+      .removeLike(card.getId)
       .then(() => {
         card.setIsLiked(true);
+        console.log(`Added like from card ID: ${card.getId()}`); 
       })
       .catch(console.error);
   } else {
     api
-      .addLike(card._id)
+      .addLike(card.getId)
       .then(() => {
         card.setIsLiked(false);
+        console.log(`Removed like from card ID: ${card.getId()}`); 
+
       })
       .catch(console.error);
   }
@@ -258,12 +261,13 @@ confirmDeleteModal.setEventListeners();
 function handleDeleteClick(cardData) {
   confirmDeleteModal.open();
   confirmDeleteModal.handleDelete(() => {
-    console.log("Loading");
+    console.log("Loading...");
     api
       .deleteCard(cardData._id)
       .then(() => {
         console.log("Card deleted successfully");
         cardData.handleDeleteCard();
+        console.log(`Deleted card with ID: ${cardData._id}`);
         confirmDeleteModal.close();
       })
       .catch((err) => {
