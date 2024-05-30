@@ -207,50 +207,24 @@ profileAvatarContainer.addEventListener("click", () => {
 /*                                       */
 
 function handleLikeClick(card) {
-  if (card.isLiked === true) {
+  if (card.setIsLiked === true) {
     api
       .removeLike(card._id)
       .then(() => {
-        card.isLiked = false;
-        card.handleLikeIcon();
+        card.setIsLiked = false;
+        // card.handleLikeIcon();
       })
       .catch(console.error);
   } else {
     api
       .addLike(card._id)
       .then(() => {
-        card.isLiked = true;
-        card.handleLikeIcon();
+        card.setIsLiked = true;
+        // card.handleLikeIcon();
       })
       .catch(console.error);
   }
 }
-
-// function handleLikeClick(card) {
-//   console.log(card);
-//   if (card.isLiked) {
-//     api
-//       .removeLike(card._id)
-//       .then(() => {
-//         card.handleLikeIcon();
-//         card.isLiked = false;
-//       })
-//       .catch((err) => {
-//         console.error(err);
-//       });
-//   }
-//   if (!card.isLiked) {
-//     api
-//       .addLike(card._id)
-//       .then(() => {
-//         card.handleLikeIcon();
-//         card.isLiked = true;
-//       })
-//       .catch((err) => {
-//         console.error(err);
-//       });
-//   }
-// }
 
 function handleImageClick(name, link) {
   modalWithImage.open(name, link);
