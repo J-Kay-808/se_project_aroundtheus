@@ -1,15 +1,20 @@
 export default class Card {
-  constructor(data, cardSelector, handleImageClick, handleDeleteClick,
-    handleLikeClick) {
+  constructor(
+    data,
+    cardSelector,
+    handleImageClick,
+    handleLikeClick,
+    handleDeleteClick
+  ) {
     this.name = data.name;
-    this.link = data.link; 
-    this._id = data._id; 
+    this.link = data.link;
+    this._id = data._id;
     this._isLiked = data.isLiked;
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
     this._handleLikeClick = handleLikeClick;
     this._handleDeleteClick = handleDeleteClick;
-  } 
+  }
 
   getCardId() {
     return this._id;
@@ -18,29 +23,27 @@ export default class Card {
   getIsLiked() {
     return this._isLiked;
   }
-  
+
   _setEventListeners() {
     this._likeButton.addEventListener("click", () => {
-      console.log('Like button clicked', this);
+      console.log("Like button clicked", this);
       this._handleLikeClick(this);
     });
 
     this._deleteButton.addEventListener("click", () => {
-      console.log('Delete button clicked', this);
+      console.log("Delete button clicked", this);
       this._handleDeleteClick(this);
     });
 
     this._cardImageEl.addEventListener("click", () => {
-      this._handleImageClick({name: this.name, link: this.link});
+      this._handleImageClick({ name: this.name, link: this.link });
     });
   }
 
-
-
-  setIsLiked(isLiked) { 
-     this._isLiked = isLiked; 
-     this._renderLikes(); 
- } 
+  setIsLiked(isLiked) {
+    this._isLiked = isLiked;
+    this._renderLikes();
+  }
 
   _renderLikes() {
     if (this._isLiked) {
@@ -50,16 +53,17 @@ export default class Card {
     }
   }
 
-  handleDeleteCard(){
+  handleDeleteCard() {
     this._cardElement.remove();
     this._cardElement = null;
   }
 
   getView() {
     this._cardElement = document
-    .querySelector(this._cardSelector)
-    .content.querySelector(".card").cloneNode(true);
-    
+      .querySelector(this._cardSelector)
+      .content.querySelector(".card")
+      .cloneNode(true);
+
     this._cardImageEl = this._cardElement.querySelector(".card__image");
     this._cardTitleEl = this._cardElement.querySelector(".card__title");
     this._deleteButton = this._cardElement.querySelector(".delete__button");

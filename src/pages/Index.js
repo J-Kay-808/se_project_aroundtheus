@@ -5,7 +5,7 @@ import Section from "../components/Section.js";
 import ModalWithForm from "../components/ModalWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import ModalWithImage from "../components/ModalWithImage.js";
-import { initialCards, settings } from "../utils/Constants.js";
+import { settings } from "../utils/Constants.js";
 import Api from "../components/Api.js";
 import ModalWithConfirm from "../components/ModalWithConfirm.js";
 
@@ -70,10 +70,10 @@ api
   .getInitialCards()
   .then((cards) => {
     cardSection = new Section(
-      { items: initialCards, settings, renderer: createCard },
+      { items: cards, settings, renderer: createCard },
       ".cards__list"
     );
-    cardSection.renderItems(cards);
+    cardSection.renderItems();
   })
   .catch((err) => {
     console.error(err);
@@ -205,18 +205,18 @@ profileAvatarContainer.addEventListener("click", () => {
 function handleLikeClick(card) {
   if (card.getIsLiked()) {
     api
-      .removeLike(card.getId)
+      .removeLike(card.getCardId)
       .then(() => {
         card.setIsLiked(true);
-        console.log(`Added like from card ID: ${card.getId()}`); 
+        console.log(`Added like from card ID: ${card.getCardId()}`); 
       })
       .catch(console.error);
   } else {
     api
-      .addLike(card.getId)
+      .addLike(card.getCardId)
       .then(() => {
         card.setIsLiked(false);
-        console.log(`Removed like from card ID: ${card.getId()}`); 
+        console.log(`Removed like from card ID: ${card.getCardId()}`); 
 
       })
       .catch(console.error);
