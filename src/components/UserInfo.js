@@ -16,13 +16,12 @@
     return this._userData
   }
 
-  setUserInfo({ name, description, avatar }) {
+  setUserInfo({ name, description }) {
     this.name.textContent = name;
     this._description.textContent = description;
-    this._avatarElement.src = avatar;
   }
 
-  updateAvatar(avatarUrl) {
+  updatedAvatar(avatarUrl) {
     this._avatarElement.src = avatarUrl;
   }
 

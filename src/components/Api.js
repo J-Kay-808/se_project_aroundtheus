@@ -15,20 +15,14 @@ export default class Api {
     return fetch(`${this.server}/cards`, {
       headers: this.headers,
     })
-      .then(this._checkResponse)
-      .then((result) => {
-        return result;
-      });
+      .then(this._checkResponse);
   }
 
   getUserInfo() {
     return fetch(`${this.server}/users/me`, {
       headers: this.headers,
     })
-      .then(this._checkResponse)
-      .then((userData) => {
-        return userData;
-      });
+      .then(this._checkResponse);
   }
 
   renderCards() {
@@ -40,9 +34,7 @@ export default class Api {
       method: "PATCH",
       headers: this.headers,
       body: JSON.stringify({ name, about }),
-    }).then((result) => {
-      return result;
-    });
+    }).then(this._checkResponse);
   }
 
   updateAvatar(avatar) {
@@ -76,8 +68,7 @@ export default class Api {
       method: "PUT",
       headers: this.headers,
     })
-      .then(this._checkResponse)
-      .then(() => console.log("Card has been liked"));
+      .then(this._checkResponse);
   }
 
   removeLike(cardId) {
@@ -85,7 +76,6 @@ export default class Api {
       method: "DELETE",
       headers: this.headers,
     })
-      .then(this._checkResponse)
-      .then(() => console.log("Card is not yet liked"));
+      .then(this._checkResponse);
   }
 }

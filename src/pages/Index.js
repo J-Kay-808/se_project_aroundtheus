@@ -59,34 +59,25 @@ function createCard(cardData) {
     cardSelector,
     handleImageClick,
     handleLikeClick,
-    handleDeleteClick,
+    handleDeleteClick
   );
   return addCard.getView();
 }
 
+let cardSection;
+
 api
   .getInitialCards()
   .then((cards) => {
-    console.log(cards);
-    cards.forEach((card) => {
-      cardSection.addItem(createCard(card));
-    });
+    cardSection = new Section(
+      { items: initialCards, settings, renderer: createCard },
+      ".cards__list"
+    );
+    cardSection.renderItems(cards);
   })
   .catch((err) => {
     console.error(err);
   });
-
-const cardSection = new Section(
-  {
-    items: initialCards,
-    settings,
-    renderer: createCard,
-  },
-
-  ".cards__list"
-);
-
-cardSection.renderItems();
 
 /*                                       */
 /*          FormValidator.js             */
@@ -188,7 +179,7 @@ function handleAvatarSubmit(data) {
   api
     .updateAvatar({ avatar: data.link })
     .then((res) => {
-      userInfo.updateAvatar(res.avatar);
+      userInfo.updatedAvatar(res.avatar);
       // formValidators["edit-avatar-form"].disableButton();
       // formValidators["edit-avatar-form"].resetForms();
       editAvatarModal.close();
@@ -234,6 +225,7 @@ function handleLikeClick(card) {
       .catch(console.error);
   }
 }
+
 // function handleLikeClick(card) {
 //   console.log(card);
 //   if (card.isLiked) {
@@ -306,9 +298,9 @@ function handleDeleteClick(card) {
         confirmDeleteModal.close();
         card.handleDeleteCard();
       })
-      .catch((error) => {
+      .catch((err) => {
         console
-          .error("Error deleting card:", error)
+          .error("Error deleting card:", err)
           .finally(() => confirmation.setSubmitText(false));
       });
   });

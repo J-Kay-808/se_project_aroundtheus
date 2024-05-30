@@ -37,12 +37,12 @@ export default class FormValidator {
     return this._inputEls.some((inputEl) => !inputEl.validity.valid);
   }
 
-  _setEventListeners(options) {
-    this._toggleButtonState(options);
-    this._inputEls.forEach((inputEl) => {
-      inputEl.addEventListener("input", () => {
-        this._checkInputValidity(inputEl, options);
-        this._toggleButtonState(this._inputEls, this._submitButton, options);
+
+  _setEventListeners() {
+    this._inputEls.forEach((_inputEl) => {
+      _inputEl.addEventListener("input", () => {
+        this._checkInputValidity(_inputEl);
+        this._toggleButtonState();
       });
     });
   }
@@ -64,9 +64,9 @@ export default class FormValidator {
     this._toggleButtonState();
   }
 
-  resetForms() {
-    this._form.reset();
-  }
+  // resetForms() {
+  //   this._form.reset();
+  // }
 
   //  BUTTONS
 
