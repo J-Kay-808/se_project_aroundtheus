@@ -258,7 +258,7 @@ confirmDeleteModal.setEventListeners();
 function handleDeleteClick(cardData) {
   confirmDeleteModal.open();
   confirmDeleteModal.handleDelete(() => {
-    console.log(cardData);
+    console.log("Loading");
     api
       .deleteCard(cardData._id)
       .then(() => {
@@ -268,6 +268,9 @@ function handleDeleteClick(cardData) {
       })
       .catch((err) => {
         console.error("Error deleting card:", err);
+      })
+      .finally(() => {
+        confirmDeleteModal.renderLoading(false);
       });
   });
 }
