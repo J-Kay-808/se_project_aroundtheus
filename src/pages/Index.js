@@ -205,18 +205,18 @@ profileAvatarContainer.addEventListener("click", () => {
 function handleLikeClick(card) {
   if (card.getIsLiked()) {
     api
-      .removeLike(card.getCardId)
+      .removeLike(card.getCardId())
       .then(() => {
         card.setIsLiked(true);
-        console.log(`Added like from card ID: ${card.getCardId()}`); 
+        // console.log(`Added like from card ID: ${card.getCardId()}`); 
       })
       .catch(console.error);
   } else {
     api
-      .addLike(card.getCardId)
+      .addLike(card.getCardId())
       .then(() => {
         card.setIsLiked(false);
-        console.log(`Removed like from card ID: ${card.getCardId()}`); 
+        // console.log(`Removed like from card ID: ${card.getCardId()}`); 
 
       })
       .catch(console.error);
@@ -258,16 +258,16 @@ function handleAddCardSubmit(data) {
 const confirmDeleteModal = new ModalWithConfirm("#delete-modal");
 confirmDeleteModal.setEventListeners();
 
-function handleDeleteClick(cardData) {
+function handleDeleteClick(card) {
   confirmDeleteModal.open();
   confirmDeleteModal.handleDelete(() => {
     console.log("Loading...");
     api
-      .deleteCard(cardData._id)
+      .deleteCard(card.getCardId())
       .then(() => {
         console.log("Card deleted successfully");
-        cardData.handleDeleteCard();
-        console.log(`Deleted card with ID: ${cardData._id}`);
+        card.handleDeleteCard();
+        // console.log(`Deleted card with ID: ${cardData._id}`);
         confirmDeleteModal.close();
       })
       .catch((err) => {

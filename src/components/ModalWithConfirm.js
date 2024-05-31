@@ -17,4 +17,13 @@ export default class ModalWithConfirm extends Modal {
       this._handleDeleteSubmit();
     });
   }
+
+  renderLoading(isSaving) {
+    if (isSaving) {
+      this._modalButton.textContent = "Saving...";
+    } else {
+      this._modalButton.textContent = "Save";
+    }
+  }
+
 }

@@ -179,13 +179,13 @@
 }
 
 .modal__container-delete {
-  min-width: 430px;
-  max-height: 181px;
-  margin-top: 270px;
-  padding: 34px;
-  display: flex;
-  align-items: center;
+  background-color: #fff;
+  margin: auto;
+  padding: 34px 36px 36px;
+  border-radius: 10px;
+  position: relative;
 }
+
 
 
 
@@ -235,5 +235,10 @@
   .modal__form_delete{
     margin-top: 0;
   }
+
+  .modal__container-delete {
+    padding: 22px;
+  }
+
 
 }
