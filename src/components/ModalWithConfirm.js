@@ -4,6 +4,7 @@ export default class ModalWithConfirm extends Modal {
   constructor(modalSelector) {
     super({modalSelector});
     this._form = this._modalElement.querySelector(".modal__form");
+    this._modalButton = this._modalElement.querySelector(".modal__button");
   }
 
   handleDelete(handleDeleteSubmit) {
@@ -18,12 +19,12 @@ export default class ModalWithConfirm extends Modal {
     });
   }
 
-  renderLoading(isSaving) {
-    if (isSaving) {
-      this._modalButton.textContent = "Saving...";
-    } else {
-      this._modalButton.textContent = "Save";
+  renderLoading() {
+    if (!this._modalButton) {
+        console.error('Element not found');
+        return;
     }
+    this._modalButton .textContent = "Loading...";
   }
 
 }

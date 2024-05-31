@@ -38,6 +38,8 @@ const cardSelector = "#card-template";
 // FORMS
 const forms = document.querySelectorAll(settings.formSelector);
 
+const deleteCardButton = document.querySelector("#delete-close-button");
+
 /*                                       */
 /*                Api.JS                 */
 /*                                       */
@@ -124,13 +126,12 @@ modalWithImage.setEventListeners();
 api
   .getUserInfo()
   .then((res) => {
-    userInfo.setUserInfo({name: res.name, description: res.about});
+    userInfo.setUserInfo({ name: res.name, description: res.about });
     userInfo.setAvatar(res.avatar);
   })
   .catch((err) => {
     console.error(err);
   });
-
 
 const userInfo = new UserInfo({
   profileTitle: ".profile__title",
@@ -205,19 +206,18 @@ profileAvatarContainer.addEventListener("click", () => {
 function handleLikeClick(card) {
   if (card.getIsLiked()) {
     api
-      .removeLike(card.getCardId())
+      .addLike(card.getCardId())
       .then(() => {
-        card.setIsLiked(true);
-        // console.log(`Added like from card ID: ${card.getCardId()}`); 
+        card.setIsLiked(false);
+        // console.log(`Added like from card ID: ${card.getCardId()}`);
       })
       .catch(console.error);
   } else {
     api
-      .addLike(card.getCardId())
+      .removeLike(card.getCardId())
       .then(() => {
-        card.setIsLiked(false);
-        // console.log(`Removed like from card ID: ${card.getCardId()}`); 
-
+        card.setIsLiked(true);
+        // console.log(`Removed like from card ID: ${card.getCardId()}`);
       })
       .catch(console.error);
   }
@@ -260,6 +260,7 @@ confirmDeleteModal.setEventListeners();
 
 function handleDeleteClick(card) {
   confirmDeleteModal.open();
+  confirmDeleteModal.renderLoading(true);
   confirmDeleteModal.handleDelete(() => {
     console.log("Loading...");
     api
