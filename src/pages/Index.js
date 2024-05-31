@@ -258,8 +258,8 @@ confirmDeleteModal.setEventListeners();
 
 function handleDeleteClick(card) {
   confirmDeleteModal.open();
-  confirmDeleteModal.renderLoading(true);
   confirmDeleteModal.handleDelete(() => {
+    confirmDeleteModal.renderLoading(true);
     console.log("Loading...");
     api
       .deleteCard(card.getCardId())

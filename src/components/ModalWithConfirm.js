@@ -19,10 +19,12 @@ export default class ModalWithConfirm extends Modal {
     });
   }
 
-  renderLoading() {
-    if (!this._modalButton) {
-      return;
+
+  renderLoading(isLoading) {
+    if (isLoading) {
+      this._modalButton.textContent = "Loading...";
+    } else {
+      this._modalButton.textContent = "YES";
     }
-    this._modalButton.textContent = "YES";
   }
 }
