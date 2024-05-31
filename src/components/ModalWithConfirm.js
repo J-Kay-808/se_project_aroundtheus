@@ -2,7 +2,7 @@ import Modal from "./Modal";
 
 export default class ModalWithConfirm extends Modal {
   constructor(modalSelector) {
-    super({modalSelector});
+    super({ modalSelector });
     this._form = this._modalElement.querySelector(".modal__form");
     this._modalButton = this._modalElement.querySelector(".modal__button");
   }
@@ -21,10 +21,8 @@ export default class ModalWithConfirm extends Modal {
 
   renderLoading() {
     if (!this._modalButton) {
-        console.error('Element not found');
-        return;
+      return;
     }
-    this._modalButton .textContent = "Loading...";
+    this._modalButton.textContent = "YES";
   }
-
 }

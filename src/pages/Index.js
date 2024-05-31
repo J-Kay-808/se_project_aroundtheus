@@ -206,18 +206,16 @@ profileAvatarContainer.addEventListener("click", () => {
 function handleLikeClick(card) {
   if (card.getIsLiked()) {
     api
-      .addLike(card.getCardId())
+      .removeLike(card.getCardId())
       .then(() => {
         card.setIsLiked(false);
-        // console.log(`Added like from card ID: ${card.getCardId()}`);
       })
       .catch(console.error);
   } else {
     api
-      .removeLike(card.getCardId())
+      .addLike(card.getCardId())
       .then(() => {
         card.setIsLiked(true);
-        // console.log(`Removed like from card ID: ${card.getCardId()}`);
       })
       .catch(console.error);
   }
