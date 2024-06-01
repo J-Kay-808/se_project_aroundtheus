@@ -258,7 +258,6 @@ function handleAddCardSubmit(data) {
 /*                                       */
 
 const confirmDeleteModal = new ModalWithConfirm("#delete-modal");
-confirmDeleteModal.setEventListeners();
 
 function handleDeleteClick(card) {
   confirmDeleteModal.open();
@@ -269,10 +268,9 @@ function handleDeleteClick(card) {
       .deleteCard(card.getCardId())
       .then(() => {
         console.log("Card deleted successfully");
-        card.handleDeleteCard();
+        card.removeCard();
         // console.log(`Deleted card with ID: ${cardData._id}`);
         confirmDeleteModal.close();
-        deletCardForm.reset();
 
       })
       .catch((err) => {
@@ -283,6 +281,9 @@ function handleDeleteClick(card) {
       });
   });
 }
+
+confirmDeleteModal.setEventListeners()
+
 
 /*                                       */
 /*             Event Listeners           */

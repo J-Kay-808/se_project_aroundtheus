@@ -36,7 +36,7 @@ export default class Card {
     });
 
     this._cardImageEl.addEventListener("click", () => {
-      this._handleImageClick({ name: this.name, link: this.link });
+      this._handleImageClick(this);
     });
   }
 
@@ -53,7 +53,7 @@ export default class Card {
     }
   }
 
-  handleDeleteCard() {
+  removeCard() {
     this._cardElement.remove();
     this._cardElement = null;
   }
