@@ -38,6 +38,8 @@ const cardSelector = "#card-template";
 // FORMS
 const forms = document.querySelectorAll(settings.formSelector);
 
+const deletCardForm = document.forms["modal-form-delete"];
+
 const deleteCardButton = document.querySelector("#delete-close-button");
 
 /*                                       */
@@ -118,6 +120,11 @@ addCardButton.addEventListener("click", () => {
 
 const modalWithImage = new ModalWithImage("#image-modal");
 modalWithImage.setEventListeners();
+
+function handleImageClick(name, link) {
+  modalWithImage.open(name, link);
+}
+
 
 /*                                       */
 /*             UserInfo                  */
@@ -221,9 +228,6 @@ function handleLikeClick(card) {
   }
 }
 
-function handleImageClick(name, link) {
-  modalWithImage.open(name, link);
-}
 
 /*                                       */
 /*              ADD CARD                 */
@@ -268,6 +272,8 @@ function handleDeleteClick(card) {
         card.handleDeleteCard();
         // console.log(`Deleted card with ID: ${cardData._id}`);
         confirmDeleteModal.close();
+        deletCardForm.reset();
+
       })
       .catch((err) => {
         console.error("Error deleting card:", err);
