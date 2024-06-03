@@ -178,6 +178,16 @@
   visibility: visible;
 }
 
+.modal__container-delete {
+  background-color: #fff;
+  margin: auto;
+  padding: 34px 36px 36px;
+  border-radius: 10px;
+  position: relative;
+}
+
+
+
 
 @media screen and (max-width: 400px) {
   .modal__container {
@@ -221,4 +231,14 @@
     line-height: 17px;  
     width: 238px;
   }
+
+  /* .modal__form_delete{
+    margin-top: 0;
+  } */
+
+  .modal__container-delete {
+    padding: 22px;
+  }
+
+
 }
